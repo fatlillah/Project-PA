@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IconController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.dashboard');
 });
+
+Route::get('/icon', [IconController::class, 'index']);
+Route::get('/icon/data', [IconController::class, 'data'])->name('icon.data');
+Route::post('/add-icon', [IconController::class, 'store'])->name('icon.store');

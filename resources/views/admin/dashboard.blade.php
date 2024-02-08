@@ -1,5 +1,5 @@
 @extends('layouts.apps')
-@section('header')
+@section('header-content')
 <div class="header-left">
     <div class="dashboard_bar">
         Dashboard
