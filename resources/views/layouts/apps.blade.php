@@ -50,6 +50,7 @@
     ***********************************-->
 
     @include('partials.scripts')
+    @include('admin.icon.script-crud')
 
 </body>
 

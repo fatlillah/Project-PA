@@ -19,11 +19,11 @@ class IconController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($icon) {
                 return '
-            <div class="d-flex">
-            <a data-bs-toggle="modal" data-bs-target="'.$icon->icon_id.'#edit-icon" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-            <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-            </div>
-            ';
+                <div class="d-flex">
+                <a onclick="editForm(`' . route('icon.update', $icon->id) . '`)" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                <a onclick="deleteData(`' . route('icon.destroy', $icon->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                </div>
+                ';
             })
             ->make(true);
         return $dataIcon;
@@ -46,5 +46,42 @@ class IconController extends Controller
         return response()->json([
             'status' => 'success',
         ]);
+    }
+    
+    public function show($id)
+    {
+        $icon = Icon::find($id);
+        return response()->json($icon);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $icon = Icon::find($id);
+        //validasi
+        $this->validate($request, [
+            'name' => 'required|unique:icons'
+        ], [
+            'name.required' => 'Nama icon wajib diisi',
+            'name.unique' => 'Nama icon yang dimasukkan sudah ada',
+        ]);
+    
+        $input = [
+            'name' => $request->name,
+        ];
+        $icon->update($input);
+        return response()->json([
+            'status' => 'success',
+        ]);
+    }
+    public function destroy($id)
+    {
+        try {
+            $icon = Icon::find($id);
+            $icon->delete();
+            return response()->json(['status' => 'success']);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()], 500);
+            
+        }
     }
 }

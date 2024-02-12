@@ -9,6 +9,6 @@ class Icon extends Model
 {
     use HasFactory;
     protected $table = 'icons';
-    protected $primaryKey = 'icon_id';
+    protected $primaryKey = 'id';
     protected $guarded=[];
 }
