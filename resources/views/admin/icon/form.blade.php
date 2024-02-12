@@ -1,7 +1,8 @@
-<div class="modal fade" id="add-icon" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-add-icon" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form id="add-icon-form" action="" method="POST">
             @csrf
+            @method('POST')
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="addModalLabel"></h5>
@@ -17,8 +18,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </form>

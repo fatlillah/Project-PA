@@ -18,6 +18,5 @@ Route::get('/', function () {
     return view('admin.dashboard');
 });
 
-Route::get('/icon', [IconController::class, 'index']);
 Route::get('/icon/data', [IconController::class, 'data'])->name('icon.data');
-Route::post('/add-icon', [IconController::class, 'store'])->name('icon.store');
+Route::resource('icon', IconController::class);
