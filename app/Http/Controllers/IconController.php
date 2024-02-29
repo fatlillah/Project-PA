@@ -13,6 +13,7 @@ class IconController extends Controller
     }
     public function data()
     {
+        // dd('coba');
         $icon = Icon::orderBy('id', 'desc')->get();
         $dataIcon = datatables()
             ->of($icon)
@@ -27,7 +28,6 @@ class IconController extends Controller
             })
             ->make(true);
         return $dataIcon;
-        // dd($dataIcon);
     }
 
     public function store(Request $request)
