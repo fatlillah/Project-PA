@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
+            $table->string('name_menu');
             $table->string('kode_menu');
+            $table->string('type');
             $table->string('parent');
             $table->string('sort');
-            $table->string('name_menu');
             $table->unsignedBigInteger('icon_id');
             $table->foreign('icon_id')->references('id')->on('icons');
             $table->string('url');

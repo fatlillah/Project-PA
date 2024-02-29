@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IconController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,5 @@ Route::get('/', function () {
 
 Route::resource('icon', IconController::class);
 Route::get('/datatable/icons/data', [IconController::class, 'data'])->name('icon.data');
+Route::resource('menu', MenuController::class);
+Route::get('/datatable/menus/data', [MenuController::class, 'data'])->name('menu.data');
