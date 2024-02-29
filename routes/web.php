@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('admin.dashboard');
 });
 
-Route::get('/icon/data', [IconController::class, 'data'])->name('icon.data');
+
 Route::resource('icon', IconController::class);
+Route::get('/datatable/icons/data', [IconController::class, 'data'])->name('icon.data');
