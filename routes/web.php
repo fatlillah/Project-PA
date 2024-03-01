@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IconController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,5 @@ Route::resource('icon', IconController::class);
 Route::get('/datatable/icons/data', [IconController::class, 'data'])->name('icon.data');
 Route::resource('menu', MenuController::class);
 Route::get('/datatable/menus/data', [MenuController::class, 'data'])->name('menu.data');
+Route::resource('kategori', CategoryController::class);
+Route::get('/datatable/kategoris/data', [CategoryController::class, 'data'])->name('kategori.data');
