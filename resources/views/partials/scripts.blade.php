@@ -13,4 +13,13 @@
  <script src="{{ url('assets/js/demo.js') }}"></script>
  <script src="{{ url('assets/js/styleSwitcher.js') }}"></script>
 
+	
+	
+	<!-- Chart piety plugin files -->
+    <script src="{{ url('assets/vendor/peity/jquery.peity.min.js') }}"></script>
+	<!-- Dashboard 1 -->
+	<script src="{{ url('assets/js/dashboard/dashboard-1.js') }}"></script>
+	
+	<script src="{{ url('assets/vendor/owl-carousel/owl.carousel.js') }}"></script>
+
  @stack('scripts')

@@ -3,7 +3,7 @@
 @section('header-content')
 <div class="header-left">
     <div class="dashboard_bar">
-        Menu
+        Produk
     </div>
 </div>
 @endsection
@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <button type="button" onclick="addForm('{{ route('menu.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Menu</button>
+                <button type="button" onclick="addForm('{{ route('produk.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Produk</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -21,13 +21,9 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Menu</th>
-                                <th>Kode Menu</th>
-                                <th>Tipe</th>
-                                <th>Kode Parent</th>
-                                <th>Sort</th>
-                                <th>Icon</th>
-                                <th>URL</th>
+                                <th>Kode Produk</th>
+                                <th>Kategori</th>
+                                <th>Nama Produk</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -38,6 +34,6 @@
     </div>
 </div>
 
-@include('admin.menu.form')
+@include('admin.product.form')
 @endsection
-@include('admin.menu.script')
+@include('admin.product.script')

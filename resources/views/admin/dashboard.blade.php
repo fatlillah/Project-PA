@@ -21,7 +21,7 @@
                                     <a href="javascript:void(0);" class="btn btn-rounded  fs-18 font-w500">Try Free Now</a>
                                 </div>
                                 <div class="col-xl-5 col-sm-6">
-                                    <img src="images/chart.png" alt="" class="sd-shape">
+                                    <img src="{{ url('assets/images/chart.png') }}" alt="" class="sd-shape">
                                 </div>
                             </div>
                         </div>

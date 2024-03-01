@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IconController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,5 @@ Route::resource('menu', MenuController::class);
 Route::get('/datatable/menus/data', [MenuController::class, 'data'])->name('menu.data');
 Route::resource('kategori', CategoryController::class);
 Route::get('/datatable/kategoris/data', [CategoryController::class, 'data'])->name('kategori.data');
+Route::resource('produk', ProductController::class);
+Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');

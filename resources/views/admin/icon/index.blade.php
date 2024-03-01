@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <button type="button" onclick="addForm('{{ route('icon.store') }}')" class="btn btn-primary mb-2">Tambah Icon</button>
+                <button type="button" onclick="addForm('{{ route('icon.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Icon</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -25,8 +25,6 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -36,5 +34,5 @@
 
 @include('admin.icon.form')
 @endsection
-@include('admin.icon.script-crud')
+@include('admin.icon.script')
 

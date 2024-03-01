@@ -1,18 +1,12 @@
-
 @push('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ url('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
- <script src="{{ url('assets/js/plugins-init/datatables.init.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('#example3').DataTable({
             destroy: true,
             autoWidth: false,
-            searchable: true,
             serverSide: true,
-            responsive: true,
             ajax: {
-                url: '{{ route("icon.data") }}'
+                url: '{{ route("menu.data") }}'
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -20,7 +14,25 @@
                     sortable: false
                 },
                 {
+                    data: 'name_menu'
+                },
+                {
+                    data: 'kode_menu'
+                },
+                {
+                    data: 'type'
+                },
+                {
+                    data: 'parent'
+                },
+                {
+                    data: 'sort'
+                },
+                {
                     data: 'name'
+                },
+                {
+                    data: 'url'
                 },
                 {
                     data: 'action',
@@ -31,15 +43,15 @@
             ]
         });
 
-        $('#modal-add-icon').on('submit', function(e) {
+        $('#modal-add-menu').on('submit', function(e) {
             e.preventDefault();
             $.ajax({
-                url: $('#add-icon-form').attr('action'),
+                url: $('#add-menu-form').attr('action'),
                 type: 'post',
-                data: $('#add-icon-form').serialize(),
+                data: $('#add-menu-form').serialize(),
                 success: function(res) {
                     if (res.status == 'success') {
-                        $('#modal-add-icon').modal('hide');
+                        $('#modal-add-menu').modal('hide');
                         $('#example3').DataTable().ajax.reload();
 
                     }
@@ -56,27 +68,33 @@
     });
 
     function addForm(url) {
-        $('#modal-add-icon').modal('show');
-        $('#modal-add-icon .modal-title').text('Tambah Icon');
+        $('#modal-add-menu').modal('show');
+        $('#modal-add-menu .modal-title').text('Tambah Menu');
 
-        $('#add-icon-form')[0].reset();
-        $('#add-icon-form').attr('action', url);
-        $('#modal-add-icon [name=_method]').val('post');
-        $('#modal-add-icon [name=name]').focus();
+        $('#add-menu-form')[0].reset();
+        $('#add-menu-form').attr('action', url);
+        $('#modal-add-menu [name=_method]').val('post');
+        $('#modal-add-menu [name=name_menu]').focus();
     }
 
     function editForm(url) {
-        $('#modal-add-icon').modal('show');
-        $('#modal-add-icon .modal-title').text('Edit Icon');
+        $('#modal-add-menu').modal('show');
+        $('#modal-add-menu .modal-title').text('Edit Menu');
 
-        $('#add-icon-form')[0].reset();
-        $('#add-icon-form').attr('action', url);
-        $('#modal-add-icon [name=_method]').val('put');
-        $('#modal-add-icon [name=name]').focus();
+        $('#add-menu-form')[0].reset();
+        $('#add-menu-form').attr('action', url);
+        $('#modal-add-menu [name=_method]').val('put');
+        $('#modal-add-menu [name=name_menu]').focus();
 
         $.get(url)
             .done((response) => {
-                $('#modal-add-icon [name=name]').val(response.name);
+                $('#modal-add-menu [name=name_menu]').val(response.name_menu);
+                $('#modal-add-menu [name=kode_menu]').val(response.kode_menu);
+                $('#modal-add-menu [name=type]').val(response.type);
+                $('#modal-add-menu [name=parent]').val(response.parent);
+                $('#modal-add-menu [name=sort]').val(response.sort);
+                $('#modal-add-menu [name=icon_id]').val(response.name);
+                $('#modal-add-menu [name=url]').val(response.url);
             })
             .fail((responseJSON) => {
                 alert('Tidak dapat menampilkan data.')
