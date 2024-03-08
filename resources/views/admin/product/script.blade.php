@@ -8,7 +8,13 @@
             ajax: {
                 url: '{{ route("produk.data") }}'
             },
-            columns: [{
+            columns: [
+                {
+                    data: 'checkAll',
+                    searchable: false,
+                    sortable: false
+                },
+                {
                     data: 'DT_RowIndex',
                     searchable: false,
                     sortable: false
@@ -27,7 +33,6 @@
                     searchable: false,
                     sortable: false
                 },
-
             ]
         });
 
@@ -52,7 +57,11 @@
                 }
             })
 
-        })
+        });
+        // Select all checkbox functionality
+        $('[name=checkAll]').on('change', function() {
+            $('input:checkbox').not(this).prop('checked', this.checked);
+        });
     });
 
     function addForm(url) {
@@ -78,7 +87,7 @@
             .done((response) => {
                 $('#modal-add-product [name=kode_product]').val(response.kode_product);
                 $('#modal-add-product [name=name]').val(response.name);
-                $('#modal-add-product [name=category_id]').val(response.category_name);
+                $('#modal-add-product [name=category_id]').val(response.category_id);
 
             })
             .fail((responseJSON) => {
@@ -103,6 +112,25 @@
                     alert('Gagal menghapus data.');
                 }
             });
+        }
+    }
+
+    function deleteSelected(url) {
+        if ($('input:checked').length > 1) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                $.post(url, $('.form-product').serialize())
+                .done((response) => {
+                    $('#example3').DataTable().ajax.reload();
+                    $('[name=checkAll]').prop('checked', false);
+                })
+                .fail((errors)=>{
+                    alert('Tidak dapat menghapus data')
+                    return;
+                });
+            }
+        }else{
+            alert('Pilih data yang akan dihapus');
+            return;
         }
     }
 </script>

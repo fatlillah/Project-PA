@@ -23,11 +23,18 @@ class ProductController extends Controller
     {
         // dd('coba');
         $product = Product::join('categories', 'categories.id', '=', 'products.category_id')
-        ->select('categories.*', 'products.*', 'categories.name AS category_name')
-        ->get();
+            ->select('categories.*', 'products.*', 'categories.name AS category_name')
+            ->get();
         $dataProduct = datatables()
             ->of($product)
             ->addIndexColumn()
+            ->addColumn('checkAll', function ($product) {
+                return '
+                <div class="form-check custom-checkbox">
+                    <input type="checkbox" class="form-check-input" name="id[]" value="' . $product->id . '">
+                    <label class="form-check-label"></label>
+                </div>';
+            })
             ->addColumn('action', function ($product) {
                 return '
                 <div class="d-flex">
@@ -36,6 +43,7 @@ class ProductController extends Controller
                 </div>
                 ';
             })
+            ->rawColumns(['action', 'checkAll'])
             ->make(true);
         return $dataProduct;
     }
@@ -104,7 +112,7 @@ class ProductController extends Controller
         //     'name.required' => 'Nama product wajib diisi',
         //     'name.unique' => 'Nama product yang dimasukkan sudah ada',
         // ]);
-    
+
         $product->update($request->all());
         return response()->json([
             'status' => 'success',
@@ -125,7 +133,15 @@ class ProductController extends Controller
             return response()->json(['status' => 'success']);
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()], 500);
-            
         }
+    }
+
+    public function deleteSelected(Request $request)
+    {
+        foreach($request->id as $id){
+            $product = Product::find($id);
+            $product->delete();
+        }
+        return response(null, 204);
     }
 }

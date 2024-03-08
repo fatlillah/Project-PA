@@ -23,9 +23,7 @@ Route::get('kasir', function () {
 })->middleware(['auth', 'verified', 'role:kasir']);
 
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,6 +41,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('kategori', CategoryController::class);
     Route::get('/datatable/kategoris/data', [CategoryController::class, 'data'])->name('kategori.data');
     Route::resource('produk', ProductController::class);
+    Route::post('/produk/delete-selected', [ProductController::class, 'deleteSelected'])->name('produk.delete_selected');
     Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');
 });
 
