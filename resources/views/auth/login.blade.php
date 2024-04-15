@@ -21,7 +21,7 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
 									<div class="text-center mb-3">
-										<a><img src="{{ url('assets/images/logo-resaare.jpeg') }}" width="150px" alt=""></a>
+										<a><img src="{{ url('assets/images/logo-resaare.png') }}" width="150px" alt=""></a>
 									</div>
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf

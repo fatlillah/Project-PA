@@ -61,8 +61,11 @@ class CategoryController extends Controller
             'name.unique' => 'Kategori yang dimasukkan sudah ada',
         ]);
 
+        // $aliasname = 'als_' . $request->name;
+        // $harga_jual = $request->harga_bersih + 100000 ;
         Category::create([
             'name' => $request->name,
+            // 'alias_name' => $aliasname
         ]);
         return response()->json([
             'status' => 'success',

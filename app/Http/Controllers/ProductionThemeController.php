@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Production_theme;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductionThemeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,38 +14,25 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
-        return view('admin.product.index', compact('category'));
+        return view('admin.production-theme.index');
     }
-
     public function data()
     {
         // dd('coba');
-        $product = Product::join('categories', 'categories.id', '=', 'products.category_id')
-            ->select('categories.*', 'products.*', 'categories.name AS category_name')
-            ->orderBy('products.id', 'desc')
-            ->get();
-        $dataProduct = datatables()
-            ->of($product)
+        $theme = Production_theme::orderBy('id', 'desc')->get();
+        $dataTheme = datatables()
+            ->of($theme)
             ->addIndexColumn()
-            ->addColumn('checkAll', function ($product) {
-                return '
-                <div class="form-check custom-checkbox">
-                    <input type="checkbox" class="form-check-input" name="id[]" value="' . $product->id . '">
-                    <label class="form-check-label"></label>
-                </div>';
-            })
-            ->addColumn('action', function ($product) {
+            ->addColumn('action', function ($theme) {
                 return '
                 <div class="d-flex">
-                <a onclick="editForm(`' . route('produk.update', $product->id) . '`)" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                <a onclick="deleteData(`' . route('produk.destroy', $product->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                <a onclick="editForm(`' . route('tema-produksi.update', $theme->id) . '`)" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                <a onclick="deleteData(`' . route('tema-produksi.destroy', $theme->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                 </div>
                 ';
             })
-            ->rawColumns(['action', 'checkAll'])
             ->make(true);
-        return $dataProduct;
+        return $dataTheme;
     }
 
     /**
@@ -67,7 +53,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
+        //validasi
+        // $this->validate($request, [
+        //     'name' => 'required|unique:categories'
+        // ], [
+        //     'name.required' => 'Kategori wajib diisi',
+        //     'name.unique' => 'Kategori yang dimasukkan sudah ada',
+        // ]);
+
+        Production_theme::create($request->all());
         return response()->json([
             'status' => 'success',
         ]);
@@ -81,8 +75,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return response()->json($product);
+        $theme = Production_theme::find($id);
+        return response()->json($theme);
     }
 
     /**
@@ -105,16 +99,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
+        $theme = Production_theme::find($id);
         //validasi
         // $this->validate($request, [
         //     'name' => 'required|unique:categories'
         // ], [
-        //     'name.required' => 'Nama product wajib diisi',
-        //     'name.unique' => 'Nama product yang dimasukkan sudah ada',
+        //     'name.required' => 'Kategori wajib diisi',
+        //     'name.unique' => 'Kategori yang dimasukkan sudah ada',
         // ]);
-
-        $product->update($request->all());
+    
+        $theme->update($request->all());
         return response()->json([
             'status' => 'success',
         ]);
@@ -129,20 +123,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
-            $product = Product::find($id);
-            $product->delete();
+            $theme = Production_theme::find($id);
+            $theme->delete();
             return response()->json(['status' => 'success']);
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()], 500);
+            
         }
-    }
-
-    public function deleteSelected(Request $request)
-    {
-        foreach($request->id as $id){
-            $product = Product::find($id);
-            $product->delete();
-        }
-        return response(null, 204);
     }
 }

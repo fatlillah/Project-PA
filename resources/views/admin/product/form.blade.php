@@ -11,9 +11,9 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <div class="mb-3 col-md-12">
-                                                                <label class="form-label" for="kode_product">Kode</label>
-                                                                <input type="text" name="kode_product" id="kode_product" class="form-control" placeholder="Kode Produk">
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label" for="name">Produk</label>
+                                                                <input type="text" name="name" id="name" class="form-control" placeholder="Nama Produk">
                                                                 <div class="errMsgContainer">
                                                                 </div>
                                                             </div>
@@ -27,16 +27,28 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label" for="name">Produk</label>
-                                                                <input type="text" name="name" id="name" class="form-control" placeholder="Nama Produk">
+                                                                <label class="form-label" for="stock">Stok</label>
+                                                                <input type="number" name="stock" id="stock" class="form-control" placeholder="Stok Produk" value="0">
+                                                                <div class="errMsgContainer">
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label" for="net_price">Harga Bersih</label>
+                                                                <input type="text" name="net_price" id="net_price" class="form-control" placeholder="Harga Bersih" value="0">
+                                                                <div class="errMsgContainer">
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label" for="selling_price">Harga Jual</label>
+                                                                <input type="text" name="selling_price" id="selling_price" class="form-control" placeholder="Harga Jual" value="0">
                                                                 <div class="errMsgContainer">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Batal</button>
                                                     </div>
                                                 </div>
                                             </form>

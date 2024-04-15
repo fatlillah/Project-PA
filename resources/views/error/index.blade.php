@@ -23,7 +23,7 @@
                         <h4><i class="fa fa-times-circle text-danger"></i> Forbidden Error!</h4>
                         <p>{{ $exception }}</p>
 						<div>
-                            <a class="btn btn-primary" href="index.html">Back to Home</a>
+                            <a class="btn btn-primary" href="{{ url('/dashboard') }}">Back to Dashboard</a>
                         </div>
                     </div>
                 </div>

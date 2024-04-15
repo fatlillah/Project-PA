@@ -3,7 +3,7 @@
 @section('header-content')
 <div class="header-left">
     <div class="dashboard_bar">
-        Menu
+        Tema Produk
     </div>
 </div>
 @endsection
@@ -13,7 +13,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <button type="button" onclick="addForm('{{ route('menu.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Menu</button>
+                <div class="clearfix mb-3">
+                    <a href="javascript:history.back()" class="btn btn-primary px-3 my-1 light me-2"><i class="fa fa-arrow-left"></i> </a>
+                    <a onclick="addForm('{{ route('tema-produksi.store') }}')" class="btn btn-primary px-3 my-1 me-2"><i class="fa fa-plus-circle"></i> Tambah Tema Produksi</a>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -21,13 +24,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Menu</th>
-                                <th>Kode Menu</th>
-                                <th>Tipe</th>
-                                <th>Kode Parent</th>
-                                <th>Sort</th>
-                                <th>Icon</th>
-                                <th>URL</th>
+                                <th>Tema Produksi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -38,6 +35,6 @@
     </div>
 </div>
 
-@include('admin.menu.form')
+@include('admin.production-theme.form')
 @endsection
-@include('admin.menu.script')
+@include('admin.production-theme.script')

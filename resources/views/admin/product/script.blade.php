@@ -9,18 +9,17 @@
                 url: '{{ route("produk.data") }}'
             },
             columns: [
+                @if (auth()->user()->hasRole('admin'))
                 {
                     data: 'checkAll',
                     searchable: false,
                     sortable: false
                 },
+                @endif
                 {
                     data: 'DT_RowIndex',
                     searchable: false,
                     sortable: false
-                },
-                {
-                    data: 'kode_product'
                 },
                 {
                     data: 'category_name'
@@ -29,10 +28,21 @@
                     data: 'name'
                 },
                 {
+                    data: 'stock'
+                },
+                {
+                    data: 'selling_price'
+                },
+                @if (auth()->user()->hasRole('admin'))
+                {
+                    data: 'net_price'
+                },
+                {
                     data: 'action',
                     searchable: false,
                     sortable: false
                 },
+                @endif
             ]
         });
 
@@ -46,7 +56,6 @@
                     if (res.status == 'success') {
                         $('#modal-add-product').modal('hide');
                         $('#example3').DataTable().ajax.reload();
-
                     }
                 },
                 error: function(err) {
@@ -56,22 +65,25 @@
                     });
                 }
             })
-
+            
         });
+
         // Select all checkbox functionality
         $('[name=checkAll]').on('change', function() {
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
     });
-
+    
     function addForm(url) {
+        $('#add-product-form')[0].reset();
         $('#modal-add-product').modal('show');
         $('#modal-add-product .modal-title').text('Tambah Produk');
-
-        $('#add-product-form')[0].reset();
+        
         $('#add-product-form').attr('action', url);
         $('#modal-add-product [name=_method]').val('post');
         $('#modal-add-product [name=name]').focus();
+        $('#category_id').val('Pilih Kategori'); 
+        $('#category_id').niceSelect('update'); 
     }
 
     function editForm(url) {
@@ -85,10 +97,12 @@
 
         $.get(url)
             .done((response) => {
-                $('#modal-add-product [name=kode_product]').val(response.kode_product);
                 $('#modal-add-product [name=name]').val(response.name);
                 $('#modal-add-product [name=category_id]').val(response.category_id);
-
+                $('#modal-add-product [name=category_id]').niceSelect('update');
+                $('#modal-add-product [name=stock]').val(response.stock);
+                $('#modal-add-product [name=net_price]').val(response.net_price);
+                $('#modal-add-product [name=selling_price]').val(response.selling_price);
             })
             .fail((responseJSON) => {
                 alert('Tidak dapat menampilkan data.')
@@ -128,7 +142,7 @@
                     return;
                 });
             }
-        }else{
+        } else {
             alert('Pilih data yang akan dihapus');
             return;
         }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Icon;
-use App\Models\Menu;
+use App\Models\Expenditure;
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class ExpenditureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,29 +14,31 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $icon = Icon::all();
-        return view('admin.menu.index', compact('icon'));
+        return view('admin.expenditure.index');
     }
-
     public function data()
     {
         // dd('coba');
-        $menu = Menu::join('icons', 'icons.id', '=', 'menus.icon_id')
-        ->select('icons.*', 'menus.*')
-        ->get();
-        $dataMenu = datatables()
-            ->of($menu)
+        $expenses = Expenditure::orderBy('id', 'desc')->get();
+        $dataExpenses = datatables()
+            ->of($expenses)
             ->addIndexColumn()
-            ->addColumn('action', function ($menu) {
+            ->addColumn('created_at', function($expenses){
+                return indonesian_date($expenses->created_at, false);
+            })
+            ->addColumn('nominal', function($expenses){
+                return format_of_money($expenses->nominal);
+            })
+            ->addColumn('action', function ($expenses) {
                 return '
                 <div class="d-flex">
-                <a onclick="editForm(`' . route('menu.update', $menu->id) . '`)" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                <a onclick="deleteData(`' . route('menu.destroy', $menu->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                <a onclick="editForm(`' . route('pengeluaran.update', $expenses->id) . '`)" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                <a onclick="deleteData(`' . route('pengeluaran.destroy', $expenses->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                 </div>
                 ';
             })
             ->make(true);
-        return $dataMenu;
+        return $dataExpenses;
     }
 
     /**
@@ -60,13 +61,13 @@ class MenuController extends Controller
     {
         //validasi
         // $this->validate($request, [
-        //     'name' => 'required|unique:icons'
+        //     'name' => 'required|unique:categories'
         // ], [
-        //     'name.required' => 'Nama icon wajib diisi',
-        //     'name.unique' => 'Nama icon yang dimasukkan sudah ada',
+        //     'name.required' => 'Kategori wajib diisi',
+        //     'name.unique' => 'Kategori yang dimasukkan sudah ada',
         // ]);
 
-        Menu::create($request->all());
+        Expenditure::create($request->all());
         return response()->json([
             'status' => 'success',
         ]);
@@ -80,8 +81,8 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        $menu = Menu::find($id);
-        return response()->json($menu);
+        $expenses = Expenditure::find($id);
+        return response()->json($expenses);
     }
 
     /**
@@ -104,16 +105,16 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $menu = Menu::find($id);
+        $expenses = Expenditure::find($id);
         //validasi
         // $this->validate($request, [
-        //     'name' => 'required|unique:icons'
+        //     'name' => 'required|unique:categories'
         // ], [
-        //     'name.required' => 'Nama menu wajib diisi',
-        //     'name.unique' => 'Nama menu yang dimasukkan sudah ada',
+        //     'name.required' => 'Kategori wajib diisi',
+        //     'name.unique' => 'Kategori yang dimasukkan sudah ada',
         // ]);
     
-        $menu->update($request->all());
+        $expenses->update($request->all());
         return response()->json([
             'status' => 'success',
         ]);
@@ -128,8 +129,8 @@ class MenuController extends Controller
     public function destroy($id)
     {
         try {
-            $menu = Menu::find($id);
-            $menu->delete();
+            $expenses = Expenditure::find($id);
+            $expenses->delete();
             return response()->json(['status' => 'success']);
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()], 500);

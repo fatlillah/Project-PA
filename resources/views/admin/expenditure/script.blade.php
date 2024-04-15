@@ -6,7 +6,7 @@
             autoWidth: false,
             serverSide: true,
             ajax: {
-                url: '{{ route("icon.data") }}'
+                url: '{{ route("pengeluaran.data") }}'
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -14,7 +14,13 @@
                     sortable: false
                 },
                 {
-                    data: 'name'
+                    data: 'created_at'
+                },
+                {
+                    data: 'desc'
+                },
+                {
+                    data: 'nominal'
                 },
                 {
                     data: 'action',
@@ -25,15 +31,15 @@
             ]
         });
 
-        $('#modal-add-icon').on('submit', function(e) {
+        $('#modal-add-expenses').on('submit', function(e) {
             e.preventDefault();
             $.ajax({
-                url: $('#add-icon-form').attr('action'),
+                url: $('#add-expenses-form').attr('action'),
                 type: 'post',
-                data: $('#add-icon-form').serialize(),
+                data: $('#add-expenses-form').serialize(),
                 success: function(res) {
                     if (res.status == 'success') {
-                        $('#modal-add-icon').modal('hide');
+                        $('#modal-add-expenses').modal('hide');
                         $('#example3').DataTable().ajax.reload();
 
                     }
@@ -50,27 +56,28 @@
     });
 
     function addForm(url) {
-        $('#modal-add-icon').modal('show');
-        $('#modal-add-icon .addModalLabel').text('Tambah Icon');
+        $('#modal-add-expenses').modal('show');
+        $('#modal-add-expenses .addModalLabel').text('Tambah Pengeluaran');
 
-        $('#add-icon-form')[0].reset();
-        $('#add-icon-form').attr('action', url);
-        $('#modal-add-icon [name=_method]').val('post');
-        $('#modal-add-icon [name=name]').focus();
+        $('#add-expenses-form')[0].reset();
+        $('#add-expenses-form').attr('action', url);
+        $('#modal-add-expenses [name=_method]').val('post');
+        $('#modal-add-expenses [name=desc]').focus();
     }
 
     function editForm(url) {
-        $('#modal-add-icon').modal('show');
-        $('#modal-add-icon .addModalLabel').text('Edit Icon');
+        $('#modal-add-expenses').modal('show');
+        $('#modal-add-expenses .addModalLabel').text('Edit Pengeluaran');
 
-        $('#add-icon-form')[0].reset();
-        $('#add-icon-form').attr('action', url);
-        $('#modal-add-icon [name=_method]').val('put');
-        $('#modal-add-icon [name=name]').focus();
+        $('#add-expenses-form')[0].reset();
+        $('#add-expenses-form').attr('action', url);
+        $('#modal-add-expenses [name=_method]').val('put');
+        $('#modal-add-expenses [name=desc]').focus();
 
         $.get(url)
             .done((response) => {
-                $('#modal-add-icon [name=name]').val(response.name);
+                $('#modal-add-expenses [name=desc]').val(response.desc);
+                $('#modal-add-expenses [name=nominal]').val(response.nominal);
             })
             .fail((responseJSON) => {
                 alert('Tidak dapat menampilkan data.')

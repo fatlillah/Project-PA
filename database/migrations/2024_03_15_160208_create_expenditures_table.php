@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('icons', function (Blueprint $table) {
+        Schema::create('expenditures', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('desc');
+            $table->string('nominal');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('icons');
+        Schema::dropIfExists('expenditures');
     }
 };

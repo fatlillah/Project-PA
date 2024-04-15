@@ -6,7 +6,7 @@
             autoWidth: false,
             serverSide: true,
             ajax: {
-                url: '{{ route("menu.data") }}'
+                url: '{{ route("tema-produksi.data") }}'
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -14,25 +14,7 @@
                     sortable: false
                 },
                 {
-                    data: 'name_menu'
-                },
-                {
-                    data: 'kode_menu'
-                },
-                {
-                    data: 'type'
-                },
-                {
-                    data: 'parent'
-                },
-                {
-                    data: 'sort'
-                },
-                {
                     data: 'name'
-                },
-                {
-                    data: 'url'
                 },
                 {
                     data: 'action',
@@ -43,15 +25,15 @@
             ]
         });
 
-        $('#modal-add-menu').on('submit', function(e) {
+        $('#modal-add-production-theme').on('submit', function(e) {
             e.preventDefault();
             $.ajax({
-                url: $('#add-menu-form').attr('action'),
+                url: $('#add-production-theme-form').attr('action'),
                 type: 'post',
-                data: $('#add-menu-form').serialize(),
+                data: $('#add-production-theme-form').serialize(),
                 success: function(res) {
                     if (res.status == 'success') {
-                        $('#modal-add-menu').modal('hide');
+                        $('#modal-add-production-theme').modal('hide');
                         $('#example3').DataTable().ajax.reload();
 
                     }
@@ -59,7 +41,7 @@
                 error: function(err) {
                     let error = err.responseJSON;
                     $.each(error.errors, function(index, value) {
-                        $('.errMsgContainer').append('<span class="text-danger">' + value + '</span>' + '<br>');
+                        $('.errMsgContainer').append('<span class="text-danger">' + value + '</span>');
                     });
                 }
             })
@@ -68,33 +50,27 @@
     });
 
     function addForm(url) {
-        $('#modal-add-menu').modal('show');
-        $('#modal-add-menu .modal-title').text('Tambah Menu');
+        $('#modal-add-production-theme').modal('show');
+        $('#modal-add-production-theme .addModalLabel').text('Tambah Tema Produksi');
 
-        $('#add-menu-form')[0].reset();
-        $('#add-menu-form').attr('action', url);
-        $('#modal-add-menu [name=_method]').val('post');
-        $('#modal-add-menu [name=name_menu]').focus();
+        $('#add-production-theme-form')[0].reset();
+        $('#add-production-theme-form').attr('action', url);
+        $('#modal-add-production-theme [name=_method]').val('post');
+        $('#modal-add-production-theme [name=name]').focus();
     }
 
     function editForm(url) {
-        $('#modal-add-menu').modal('show');
-        $('#modal-add-menu .modal-title').text('Edit Menu');
+        $('#modal-add-production-theme').modal('show');
+        $('#modal-add-production-theme .addModalLabel').text('Edit Tema Produksi');
 
-        $('#add-menu-form')[0].reset();
-        $('#add-menu-form').attr('action', url);
-        $('#modal-add-menu [name=_method]').val('put');
-        $('#modal-add-menu [name=name_menu]').focus();
+        $('#add-production-theme-form')[0].reset();
+        $('#add-production-theme-form').attr('action', url);
+        $('#modal-add-production-theme [name=_method]').val('put');
+        $('#modal-add-production-theme [name=name]').focus();
 
         $.get(url)
             .done((response) => {
-                $('#modal-add-menu [name=name_menu]').val(response.name_menu);
-                $('#modal-add-menu [name=kode_menu]').val(response.kode_menu);
-                $('#modal-add-menu [name=type]').val(response.type);
-                $('#modal-add-menu [name=parent]').val(response.parent);
-                $('#modal-add-menu [name=sort]').val(response.sort);
-                $('#modal-add-menu [name=icon_id]').val(response.name);
-                $('#modal-add-menu [name=url]').val(response.url);
+                $('#modal-add-production-theme [name=name]').val(response.name);
             })
             .fail((responseJSON) => {
                 alert('Tidak dapat menampilkan data.')

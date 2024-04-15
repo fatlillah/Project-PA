@@ -176,7 +176,7 @@
                                 <div class="d-flex justify-content-between recent-emails">
                                     <div class="d-flex">
                                         <div class="profile-k">
-                                            <img src="images/profile/small/pic6.jpg" alt="">
+                                            <img src="{{ url('assets/images/profile/small/pic6.jpg') }}" alt="">
                                         </div>
                                         <div class="ms-3">
                                             <h4 class="fs-18 font-w500">Fillow Final UseCase Diagram</h4>
@@ -215,7 +215,7 @@
                                 <div class="d-flex justify-content-between recent-emails">
                                     <div class="d-flex">
                                         <div class="profile-k">
-                                            <img src="images/profile/small/pic8.jpg" alt="">
+                                            <img src="{{ url('assets/images/profile/small/pic8.jpg') }}" alt="">
                                         </div>
                                         <div class="ms-3">
                                             <h4 class="fs-18 font-w500">How to improve project management flows</h4>
@@ -416,7 +416,7 @@
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <span class="big-wind">
-                                                        <img src="images/big-wind.png" alt="">
+                                                        <img src="{{ url('assets/images/big-wind.png') }}" alt="">
                                                     </span>
                                                     <div class="ms-3">
                                                         <h4>Big Wind</h4>
@@ -458,7 +458,7 @@
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <span class="big-wind">
-                                                        <img src="images/circle-hunt.png" alt="">
+                                                        <img src="{{ url('assets/images/circle-hunt.png') }}" alt="">
                                                     </span>
                                                     <div class="ms-3">
                                                         <h4>Circle Hunt</h4>
@@ -519,7 +519,7 @@
                                 <div class="msg-bx d-flex justify-content-between align-items-center">
                                     <div class="msg d-flex align-items-center w-100">
                                         <div class="image-box active">
-                                            <img src="images/profile/small/pic6.jpg" alt="">
+                                            <img src="{{ url('assets/images/profile/small/pic6.jpg') }}" alt="">
                                         </div>
                                         <div class="ms-3 w-100 ">
                                             <h4 class="fs-18 font-w600">Maren Rosser</h4>
@@ -547,7 +547,7 @@
                                 <div class="msg-bx d-flex justify-content-between align-items-center">
                                     <div class="msg d-flex align-items-center w-100">
                                         <div class="image-box">
-                                            <img src="images/profile/small/pic7.jpg" alt="">
+                                            <img src="{{ url('assets/images/profile/small/pic7.jpg') }}" alt="">
                                         </div>
                                         <div class="ms-3 w-100">
                                             <h4 class="fs-18 font-w600">Kaiya Bergson</h4>
@@ -574,7 +574,7 @@
                                 <div class="msg-bx d-flex justify-content-between align-items-center">
                                     <div class="msg d-flex align-items-center w-100">
                                         <div class="image-box active">
-                                            <img src="images/profile/small/pic4.jpg" alt="">
+                                            <img src="{{ url('assets/images/profile/small/pic4.jpg') }}" alt="">
                                         </div>
                                         <div class="ms-3 w-100">
                                             <h4 class="fs-18 font-w600">Ruben Press</h4>
@@ -601,7 +601,7 @@
                                 <div class="msg-bx d-flex justify-content-between align-items-center">
                                     <div class="msg d-flex align-items-center w-100">
                                         <div class="image-box active">
-                                            <img src="images/profile/small/pic3.jpg" alt="">
+                                            <img src="{{ url('assets/images/profile/small/pic3.jpg') }}" alt="">
                                         </div>
                                         <div class="ms-3 w-100">
                                             <h4 class="fs-18 font-w600">Cristofer Torff</h4>
@@ -628,7 +628,7 @@
                                 <div class="msg-bx d-flex justify-content-between align-items-center">
                                     <div class="msg d-flex align-items-center w-100">
                                         <div class="image-box active">
-                                            <img src="images/profile/small/pic5.jpg" alt="">
+                                            <img src="{{ url('assets/images/profile/small/pic5.jpg') }}" alt="">
                                         </div>
                                         <div class="ms-3 w-100">
                                             <h4 class="fs-18 font-w600">Ann Rosser</h4>

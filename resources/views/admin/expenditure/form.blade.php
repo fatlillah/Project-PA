@@ -1,6 +1,6 @@
-<div class="modal fade" id="modal-add-category" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-add-expenses" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form id="add-category-form" action="" method="POST">
+        <form id="add-expenses-form" action="" method="POST">
             @csrf
             @method('POST')
             <div class="modal-content">
@@ -11,8 +11,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group mb-3">
-                        <label class="form-label" for="name">Kategori</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Kategori">
+                        <label class="form-label" for="desc">Keterangan</label>
+                        <input type="text" name="desc" id="desc" class="form-control" placeholder="Keterangan">
+                        <div class="errMsgContainer">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label" for="nominal">Nominal</label>
+                        <input type="number" name="nominal" id="nominal" class="form-control" placeholder="Nominal">
                         <div class="errMsgContainer">
                         </div>
                     </div>

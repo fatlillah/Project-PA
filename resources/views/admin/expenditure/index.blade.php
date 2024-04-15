@@ -3,7 +3,7 @@
 @section('header-content')
 <div class="header-left">
     <div class="dashboard_bar">
-        Icon
+        Pengeluaran
     </div>
 </div>
 @endsection
@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <button type="button" onclick="addForm('{{ route('icon.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Icon</button>
+                <button type="button" onclick="addForm('{{ route('pengeluaran.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Pengeluaran</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -21,7 +21,9 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Icon</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>Nominal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -32,7 +34,6 @@
     </div>
 </div>
 
-@include('admin.icon.form')
+@include('admin.expenditure.form')
 @endsection
-@include('admin.icon.script')
-
+@include('admin.expenditure.script')
