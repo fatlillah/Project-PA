@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table id="example" class="display">
+                    <table id="example3" class="display table-product">
                         <thead>
                             <tr>
                                 <th>No</th>

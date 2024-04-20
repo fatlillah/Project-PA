@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('production_id');
             $table->unsignedBigInteger('product_id');
-            $table->string('stock');
-            $table->string('net_price');
-            $table->string('selling_price');
+            $table->string('stock')->nullable();
+            $table->string('net_price')->nullable();
+            $table->string('selling_price')->nullable();
             $table->string('subtotal');
             $table->timestamps();
         });

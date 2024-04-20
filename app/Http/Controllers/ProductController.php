@@ -29,6 +29,12 @@ class ProductController extends Controller
         $dataProduct = datatables()
             ->of($product)
             ->addIndexColumn()
+            ->addColumn('net_price', function ($product) {
+                return format_of_money($product->net_price);
+            })
+            ->addColumn('selling_price', function ($product) {
+                return format_of_money($product->selling_price);
+            })
             ->addColumn('checkAll', function ($product) {
                 return '
                 <div class="form-check custom-checkbox">

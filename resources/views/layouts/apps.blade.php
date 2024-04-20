@@ -7,6 +7,7 @@
     <!-- PAGE TITLE HERE -->
     <title>Admin Dashboard</title>
 
+    @stack('css')
     @include('partials.styles')
 
 </head>

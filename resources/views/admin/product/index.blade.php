@@ -16,7 +16,7 @@
                 @if (auth()->user()->hasRole('admin'))
                 <div class="btn-group mb-1">
                     <button type="button" class="btn btn-primary light px-3" onclick="addForm('{{ route('produk.store') }}')"><i class="fa fa-plus-circle"></i> Tambah Produk</button>
-                    <button type="button" class="btn btn-primary light px-3" onclick="deleteSelected('{{ route('produk.delete_selected') }}')"><i class="fa fa-trash"></i> Hapus</button>
+                    <button type="button" class="btn btn-danger light px-3" onclick="deleteSelected('{{ route('produk.delete_selected') }}')"><i class="fa fa-trash"></i> Hapus</button>
                 </div>
                 @endif
             </div>            

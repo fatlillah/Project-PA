@@ -1,7 +1,7 @@
 @push('scripts')
 <script>
  $(document).ready(function() {
-        $('.table').DataTable({
+        $('.table-production').DataTable({
             autoWidth: false,
             serverSide: true,
             ajax: {
@@ -33,9 +33,56 @@
                     searchable: false,
                     sortable: false
                 },
-            ]
+            ],
+            dom: 'Brt',
+            bSort: false,
+        })
+        .on('draw.dt', function () {
+            loadForm();
+        });
+
+        let timeout = null;
+        $(document).on('input', '.quantity, .net, .selling', function () {
+            clearTimeout(timeout); 
+            // console.log($(this).val());
+            let id = $(this).data('id');
+            // console.log(id)
+            // return;
+            let stock = $(this).closest('tr').find('.quantity').val();
+            let net_price = $(this).closest('tr').find('.net').val();
+            let selling_price = $(this).closest('tr').find('.selling').val();
+
+            if (stock < 0) {
+                $(this).val(0);
+                alert('Jumlah stok tidak boleh negatif');
+                return;
+            }
+            timeout = setTimeout(function () {
+        $.post(`{{ url('/produksi-detail') }}/${id}`, {
+            _token: $('[name=csrf-token]').attr('content'),
+            _method: 'PUT',
+            'stock': stock,
+            'net_price': net_price,
+            'selling_price': selling_price,
+        })
+            .done(response => {
+                // $(this).on('mouseout', function () {
+                    $('.table-production').DataTable().ajax.reload();
+                // });
+            })
+            .fail(errors => {
+                alert('Tidak dapat menyimpan data');
+                return;
+            })
+        }, 1000);
+        });
+
+        $('.btn-submit').on('click', function() {
+            $('#form-production').submit();
         });
     });
+
+
     function productShow() {
         $('#modal-product').modal('show');
         $('#modal-product .modal-title').text('Produk');
@@ -53,7 +100,7 @@
     }
 
     function addProduct() {
-       $.post('{{ route('produksi.store') }}', 
+       $.post('{{ route('produksi-detail.store') }}', 
        $('#form-product').serialize()
        )
        .done(response => {
@@ -84,6 +131,20 @@
                 }
             });
         }
+    }
+
+    function loadForm() {
+        $('#total_item').val($('.total_item').text());
+        $('#grand_total').val($('.grand_total').text());
+
+        $.get(`{{ url('/produksi-detail/loadForm') }}/${$('.grand_total').text()}`)
+        .done(response => {
+            $('.show-grand-total').text(response.grand_totalRp);
+        })
+        .fail(errors => {
+            alert('Tidak dapat menampilkan data');
+            return;
+        });
     }
 </script>
 @endpush

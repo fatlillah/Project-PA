@@ -43,9 +43,8 @@
         <span class="nav-text">Pengaturan</span>
     </a>
     <ul aria-expanded="false">
-        <!-- <li><a href="">User</a></li> -->
-        <li><a href="{{ url('icon') }}">Icon</a></li>
-        <li><a href="{{ url('menu') }}">Menu</a></li>
+        <li><a href="{{ url('user') }}">User</a></li>
+        {{-- <li><a href="{{ url('menu') }}">Menu</a></li> --}}
     </ul>
     @endif
 </li>

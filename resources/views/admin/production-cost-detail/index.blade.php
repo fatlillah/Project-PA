@@ -8,17 +8,50 @@
 </div>
 @endsection
 
+@push('css')
+    <style>
+        .show-grand-total{
+            font-size: 5em;
+            text-align: center;
+            height: 100px;
+            color: #ffffff;
+        }
+        .perform-fairly{
+           padding: 10px;
+           background: #f0f0f0;
+           font-size: 1.2em; 
+        }
+        .table-production tbody tr:last-child {
+            display: none;
+        }
+
+        @media(max-width: 768px){
+            .show-grand-total{
+                font-size: 3em;
+                height: 70px;
+                padding-top: 5px;
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
 <div class="row">
     <div class="col-lg-12">
 
         <div class="card mt-3">
+            <div class="card-header">
+                <label class="label label-primary">{{ $prod_themes->name }}</label>
+                <span class="float-end">
+                    <strong>01/01/01/2024</strong> 
+                </span> 
+            </div>
             <div class="card-body">
                 <div class="row mb-5">
                     <div class="mt-4 col-xl-3 col-lg-3 col-md-6 col-sm-12">
                         <h6>User:</h6>
-                        <div> <strong>Admin</strong> </div>
-                        <div>Email: areya@admin.com</div>
+                        <div> <strong>{{ auth()->user()->name }}</strong> </div>
+                        <div>{{ auth()->user()->email }}</div>
                     </div>
                 </div>
                 <form id="form-product">
@@ -34,36 +67,37 @@
                         </div>
                     </div>
                 </form>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th class="center">No.</th>
-                                <th>Nama Produk</th>
-                                <th>Qty</th>
-                                <th class="right">Harga Bersih</th>
-                                <th class="center">Harga Jual</th>
-                                <th class="right">Subtotal</th>
-                                <th width="12%"><i class="fa fa-cog"></i></th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                {{-- <div class="row">
-                    <div class="col-lg-4 col-sm-5"> </div>
-                    <div class="col-lg-4 col-sm-5 ms-auto">
-                        <table class="table table-clear">
-                            <tbody>
-                                <tr>
-                                    <td class="left"><strong>Total</strong></td>
-                                    <td class="right"><strong>$7.477,36</strong><br>
-                                        <strong>0.15050000 BTC</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <table class="table table-striped table-production">
+                    <thead>
+                        <tr>
+                            <th class="center">No.</th>
+                            <th>Nama Produk</th>
+                            <th>Qty</th>
+                            <th class="right">Harga Bersih</th>
+                            <th class="center">Harga Jual</th>
+                            <th class="right">Subtotal</th>
+                            <th width="12%"><i class="fa fa-cog"></i></th>
+                        </tr>
+                    </thead>
+                </table>
+                <form action="{{ route('produksi.store') }}" id="form-production" method="post">
+                    @csrf
+                        <div class="row">
+                            <div class="col-lg-15 ">
+                                <div class="perform-fairly"><strong>TOTAL</strong></div>    
+                                <div class="show-grand-total bg-primary" id="grand_totalRp"></div>    
+                            </div>
+                            <div class="col-lg-4 col-sm-5 ms-auto">
+                                <input type="hidden" name="production_id" value="{{ $production_id }}">
+                                <input type="hidden" name="total_item" id="total_item">
+                                <input type="hidden" name="grand_total" id="grand_total">
+                                </div>
+                            </div>
+                    </form>
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-submit" type="button">Simpan Transaksi</button>
                     </div>
-                </div> --}}
-            </div>
+                </div>
         </div>
     </div>
 </div>

@@ -15,11 +15,6 @@
             <div class="card-header">
                 <div class="btn-group mb-1">
                     <a onclick="addForm()" class="btn btn-primary light px-3"><i class="fa fa-plus-circle"></i> Produksi Baru</a>
-                    @if(session()->has('production_id'))
-                    <a href="{{ route('produksi-detail.index') }}" class="btn btn-warning light px-3"><i class="fa fa-pencil-alt"></i> Transaksi Aktif</a>
-                    @endif
-                </div>
-                <div class="btn-group mb-1">
                     <a href="{{ url('tema-produksi') }}" class="btn btn-primary light px-3"><i class="fa fa-plus-circle"></i> Tema Produksi</a>
                 </div>                
             </div>            
@@ -27,12 +22,11 @@
                 <div class="table-responsive">
                     <form action="" class="form-product">
                         @csrf
-                        <table id="example4" class="display table-production-cost" style="min-width: 845px">
+                        <table id="example4" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal</th>
-                                    <th>Tema Produksi</th>
                                     <th>User</th>
                                     <th>Total Item</th>
                                     <th>Grand Total</th>
@@ -48,6 +42,5 @@
 </div>
 
 @include('admin.production-cost.modal-prod-themes')
-@include('admin.production-cost.modal-detail')
 @endsection
 @include('admin.production-cost.script')
