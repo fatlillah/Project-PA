@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <button type="button" onclick="addForm('{{ route('kategori.store') }}')" class="btn btn-primary mb-2">Tambah Kategori</button>
+                <button type="button" onclick="addForm('{{ route('kategori.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Kategori</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

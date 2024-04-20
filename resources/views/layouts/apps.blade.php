@@ -7,6 +7,7 @@
     <!-- PAGE TITLE HERE -->
     <title>Admin Dashboard</title>
 
+    @stack('css')
     @include('partials.styles')
 
 </head>
@@ -50,7 +51,6 @@
     ***********************************-->
 
     @include('partials.scripts')
-    @include('admin.icon.script-crud')
 
 </body>
 
