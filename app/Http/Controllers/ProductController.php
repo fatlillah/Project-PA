@@ -73,6 +73,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'category_id' => 'required', 
+            'stock' => 'required|numeric', 
+            'net_price' => 'required|numeric', 
+            'selling_price' => 'required|numeric', 
+        ], [
+            'name.required' => 'Nama product wajib diisi',
+            'category_id.required' => 'Kategori wajib dipilih', 
+            'stock.required' => 'Stok wajib diisi', 
+            'stock.numeric' => 'Stok harus berupa angka', 
+            'net_price.required' => 'Harga bersih wajib diisi', 
+            'net_price.numeric' => 'Harga bersih harus berupa angka', 
+            'selling_price.required' => 'Harga jual wajib diisi', 
+            'selling_price.numeric' => 'Harga jual harus berupa angka', 
+        ]);
+
         Product::create($request->all());
         return response()->json([
             'status' => 'success',
@@ -113,12 +130,12 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         //validasi
-        // $this->validate($request, [
-        //     'name' => 'required|unique:categories'
-        // ], [
-        //     'name.required' => 'Nama product wajib diisi',
-        //     'name.unique' => 'Nama product yang dimasukkan sudah ada',
-        // ]);
+        $this->validate($request, [
+            'name' => 'required|unique:categories'
+        ], [
+            'name.required' => 'Nama product wajib diisi',
+            'name.unique' => 'Nama product yang dimasukkan sudah ada',
+        ]);
 
         $product->update($request->all());
         return response()->json([

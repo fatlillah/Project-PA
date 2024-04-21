@@ -12,15 +12,17 @@
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label class="form-label" for="desc">Keterangan</label>
-                        <input type="text" name="desc" id="desc" class="form-control" placeholder="Keterangan">
-                        <div class="errMsgContainer">
-                        </div>
+                        <input type="text" name="desc" id="desc" class="form-control @error('desc') is-invalid @enderror" placeholder="Keterangan">
+                        @error('desc')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="nominal">Nominal</label>
-                        <input type="number" name="nominal" id="nominal" class="form-control" placeholder="Nominal">
-                        <div class="errMsgContainer">
-                        </div>
+                        <input type="number" name="nominal" id="nominal" class="form-control @error('nominal') is-invalid @enderror" placeholder="Nominal">
+                        @error('nominal')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">

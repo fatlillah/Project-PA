@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // user manajemen
-Route::get('/datatable/users/data', [UserController::class, 'data'])->name('user.data');
-Route::resource('user', UserController::class);
+Route::get('/datatable/users/data', [UserController::class, 'data'])->name('users.data');
+Route::resource('users', UserController::class);
 
 Route::get('kasir', function () {
     return 'halo kasir';

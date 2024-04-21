@@ -25,8 +25,16 @@
             ]
         });
 
+        $('#modal-add-production-theme').on('hidden.bs.modal', function () {
+            $('#add-product-form').trigger('reset'); 
+            $('.is-invalid').removeClass('is-invalid'); 
+            $('.invalid-feedback').remove(); 
+        });
+
         $('#modal-add-production-theme').on('submit', function(e) {
             e.preventDefault();
+            $('.is-invalid').removeClass('is-invalid'); 
+            $('.invalid-feedback').remove(); 
             $.ajax({
                 url: $('#add-production-theme-form').attr('action'),
                 type: 'post',
@@ -39,11 +47,15 @@
                     }
                 },
                 error: function(err) {
-                    let error = err.responseJSON;
+                let error = err.responseJSON;
+                if (error.errors) {
                     $.each(error.errors, function(index, value) {
-                        $('.errMsgContainer').append('<span class="text-danger">' + value + '</span>');
+                        $('#add-production-theme-form [name="' + index + '"]').addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
                     });
+                } else {
+                    alert('Terjadi kesalahan saat memproses permintaan.');
                 }
+            }
             })
 
         })

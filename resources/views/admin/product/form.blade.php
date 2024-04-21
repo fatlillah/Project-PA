@@ -13,36 +13,43 @@
                                                         <div class="row">
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label" for="name">Produk</label>
-                                                                <input type="text" name="name" id="name" class="form-control" placeholder="Nama Produk">
-                                                                <div class="errMsgContainer">
-                                                                </div>
+                                                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Produk">
+                                                                @error('name')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label" for="category_id">Kategori</label>
-                                                                <select id="category_id" name="category_id" class="default-select form-control wide" style="display: none;">
+                                                                <select id="category_id" name="category_id" class="default-select form-control @error('category_id') is-invalid @enderror wide" style="display: none;">
                                                                     <option selected="" disabled>Pilih Kategori</option>
                                                                     @foreach($category as $item)
                                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                @error('category_id')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label" for="stock">Stok</label>
-                                                                <input type="number" name="stock" id="stock" class="form-control" placeholder="Stok Produk" value="0">
-                                                                <div class="errMsgContainer">
-                                                                </div>
+                                                                <input type="number" name="stock" id="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="Stok Produk" value="0">
+                                                                @error('stock')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label" for="net_price">Harga Bersih</label>
-                                                                <input type="text" name="net_price" id="net_price" class="form-control" placeholder="Harga Bersih" value="0">
-                                                                <div class="errMsgContainer">
-                                                                </div>
+                                                                <input type="text" name="net_price" id="net_price" class="form-control @error('net_price') is-invalid @enderror" placeholder="Harga Bersih" value="0">
+                                                                @error('net_price')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label" for="selling_price">Harga Jual</label>
-                                                                <input type="text" name="selling_price" id="selling_price" class="form-control" placeholder="Harga Jual" value="0">
-                                                                <div class="errMsgContainer">
-                                                                </div>
+                                                                <input type="text" name="selling_price" id="selling_price" class="form-control @error('selling_price') is-invalid @enderror" placeholder="Harga Jual" value="0">
+                                                                @error('selling_price')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>

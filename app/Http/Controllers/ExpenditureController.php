@@ -60,12 +60,13 @@ class ExpenditureController extends Controller
     public function store(Request $request)
     {
         //validasi
-        // $this->validate($request, [
-        //     'name' => 'required|unique:categories'
-        // ], [
-        //     'name.required' => 'Kategori wajib diisi',
-        //     'name.unique' => 'Kategori yang dimasukkan sudah ada',
-        // ]);
+        $this->validate($request, [
+            'desc' => 'required',
+            'nominal' => 'required'
+        ], [
+            'desc.required' => 'Keterangan wajib diisi',
+            'nominal.required' => 'Nominal wajib diisi',
+        ]);
 
         Expenditure::create($request->all());
         return response()->json([
@@ -107,12 +108,13 @@ class ExpenditureController extends Controller
     {
         $expenses = Expenditure::find($id);
         //validasi
-        // $this->validate($request, [
-        //     'name' => 'required|unique:categories'
-        // ], [
-        //     'name.required' => 'Kategori wajib diisi',
-        //     'name.unique' => 'Kategori yang dimasukkan sudah ada',
-        // ]);
+        $this->validate($request, [
+            'desc' => 'required',
+            'nominal' => 'required'
+        ], [
+            'desc.required' => 'Keterangan wajib diisi',
+            'nominal.required' => 'Nominal wajib diisi',
+        ]);
     
         $expenses->update($request->all());
         return response()->json([

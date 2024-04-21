@@ -6,7 +6,7 @@
             autoWidth: false,
             serverSide: true,
             ajax: {
-                url: '{{ route("pengeluaran.data") }}'
+                url: '{{ route("users.data") }}'
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -14,13 +14,13 @@
                     sortable: false
                 },
                 {
-                    data: 'created_at'
+                    data: 'name'
                 },
                 {
-                    data: 'desc'
+                    data: 'email'
                 },
                 {
-                    data: 'nominal'
+                    data: 'role'
                 },
                 {
                     data: 'action',
@@ -31,23 +31,24 @@
             ]
         });
 
-        $('#modal-add-expenses').on('hidden.bs.modal', function () {
-            $('#add-expenses-form').trigger('reset'); // Reset form fields
-            $('.is-invalid').removeClass('is-invalid'); // Remove error styling
-            $('.invalid-feedback').remove(); // Remove error messages
+        
+        $('#modal-add-user').on('hidden.bs.modal', function () {
+            $('#add-product-form').trigger('reset'); 
+            $('.is-invalid').removeClass('is-invalid'); 
+            $('.invalid-feedback').remove(); 
         });
 
-        $('#modal-add-expenses').on('submit', function(e) {
+        $('#modal-add-user').on('submit', function(e) {
             e.preventDefault();
-            $('.is-invalid').removeClass('is-invalid'); // Remove previous error styling
-            $('.invalid-feedback').remove(); // Remove previous error messages
+            $('.is-invalid').removeClass('is-invalid'); 
+            $('.invalid-feedback').remove(); 
             $.ajax({
-                url: $('#add-expenses-form').attr('action'),
+                url: $('#add-user-form').attr('action'),
                 type: 'post',
-                data: $('#add-expenses-form').serialize(),
+                data: $('#add-user-form').serialize(),
                 success: function(res) {
                     if (res.status == 'success') {
-                        $('#modal-add-expenses').modal('hide');
+                        $('#modal-add-user').modal('hide');
                         $('#example3').DataTable().ajax.reload();
 
                     }
@@ -56,7 +57,7 @@
                 let error = err.responseJSON;
                 if (error.errors) {
                     $.each(error.errors, function(index, value) {
-                        $('#add-expenses-form [name="' + index + '"]').addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
+                        $('#add-user-form [name="' + index + '"]').addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
                     });
                 } else {
                     alert('Terjadi kesalahan saat memproses permintaan.');
@@ -68,28 +69,34 @@
     });
 
     function addForm(url) {
-        $('#modal-add-expenses').modal('show');
-        $('#modal-add-expenses .addModalLabel').text('Tambah Pengeluaran');
+        $('#modal-add-user').modal('show');
+        $('#modal-add-user .addModalLabel').text('Tambah User');
 
-        $('#add-expenses-form')[0].reset();
-        $('#add-expenses-form').attr('action', url);
-        $('#modal-add-expenses [name=_method]').val('post');
-        $('#modal-add-expenses [name=desc]').focus();
+        $('#add-user-form')[0].reset();
+        $('#add-user-form').attr('action', url);
+        $('#modal-add-user [name=_method]').val('post');
+        $('#modal-add-user [name=name]').focus();
+       
     }
 
     function editForm(url) {
-        $('#modal-add-expenses').modal('show');
-        $('#modal-add-expenses .addModalLabel').text('Edit Pengeluaran');
+        $('#modal-add-user').modal('show');
+        $('#modal-add-user .addModalLabel').text('Edit User');
 
-        $('#add-expenses-form')[0].reset();
-        $('#add-expenses-form').attr('action', url);
-        $('#modal-add-expenses [name=_method]').val('put');
-        $('#modal-add-expenses [name=desc]').focus();
+        $('#add-user-form')[0].reset();
+        $('#add-user-form').attr('action', url);
+        $('#modal-add-user [name=_method]').val('put');
+        $('#modal-add-user [name=name]').focus();
+         
 
         $.get(url)
             .done((response) => {
-                $('#modal-add-expenses [name=desc]').val(response.desc);
-                $('#modal-add-expenses [name=nominal]').val(response.nominal);
+                $('#modal-add-user [name=name]').val(response.name);
+                $('#modal-add-user [name=email]').val(response.email);
+                $('#role').val('Pilih peran'); 
+                $('#role').niceSelect('update');
+                $('#role').val(response.role);
+                $('#role').niceSelect('update');
             })
             .fail((responseJSON) => {
                 alert('Tidak dapat menampilkan data.')
