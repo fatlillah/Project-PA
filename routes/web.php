@@ -20,9 +20,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// user manajemen
-Route::get('/datatable/users/data', [UserController::class, 'data'])->name('users.data');
-Route::resource('users', UserController::class);
 
 Route::get('kasir', function () {
     return 'halo kasir';
@@ -43,8 +40,12 @@ Route::get('/datatable/pengeluarans/data', [ExpenditureController::class, 'data'
 Route::resource('pengeluaran', ExpenditureController::class);
 });
 
-// user profil
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    // user manajemen
+    Route::get('/datatable/users/data', [UserController::class, 'data'])->name('users.data');
+    Route::resource('users', UserController::class);
+    
+    // user profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -60,8 +61,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 // biaya produksi
     Route::get('/produksi/create/{id}', [Production_costController::class, 'create'])->name('produksi.create');
     Route::get('/datatable/produksis/data', [Production_costController::class, 'data'])->name('produksi.data');
+    Route::get('/produksi/show', [Production_costController::class, 'show'])->name('produksi.show');
     Route::resource('produksi', Production_costController::class)
-        ->except('create');
+        ->except('create', 'show');
 
 // biaya produksi detail
     Route::get('/datatable/produksi-details/data/{id}', [ProductionCostDetailController::class, 'data'])->name('produksi-detail.data');

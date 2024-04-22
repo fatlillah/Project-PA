@@ -44,7 +44,7 @@ $(document).ready(function() {
             dom: 'Brt',
             bSort: false,
             ajax: {
-                url: '{{ route("produksi.data") }}'
+                url: '{{ route("produksi.show") }}',
             },
             columns: [
                 {
@@ -69,8 +69,6 @@ $(document).ready(function() {
                 },
             ]
         });
-       
-
     });
 
     function addForm() {

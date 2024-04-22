@@ -36,7 +36,10 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                                            <div class="input-group" id="show_hide_password">
+                                                <input type="password" class="form-control @error('password') is-invalid @enderror border-end-0" id="password" name="password" placeholder="Password"> 
+                                                <a href="javascript:;" class="input-group-text bg-transparent"><i class='fas fa-eye'></i></a>
+                                            </div>
                                             @error('password')
                                            <div class="invalid-feedback">
                                                {{ $message }}
@@ -44,7 +47,7 @@
                                            @enderror
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Login</button>
                                         </div>
                                     </form>
                                     {{-- <div class="new-account mt-3">

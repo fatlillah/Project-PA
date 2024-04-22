@@ -43,7 +43,7 @@
             <div class="card-header">
                 <label class="label label-primary">{{ $prod_themes->name }}</label>
                 <span class="float-end">
-                    <strong>01/01/01/2024</strong> 
+                    <strong>{{ indonesian_date(now(), false) }}</strong> 
                 </span> 
             </div>
             <div class="card-body">

@@ -27,7 +27,10 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label class="form-label" for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                        <div class="input-group" id="show_hide_password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror border-end-0" id="password" name="password" placeholder="Enter Password"> 
+                            <a href="javascript:;" class="input-group-text bg-transparent"><i class='fas fa-eye'></i></a>
+                        </div>
                         @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
