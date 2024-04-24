@@ -14,7 +14,7 @@
                                 <th>No</th>
                                 <th>Produk</th>
                                 <th>Stok</th>
-                                <th>Harga Bersih</th>
+                                <th>Harga Jual</th>
                                 <th width="12%"><i class="fa fa-cog"></i></th>
                             </tr>
                         </thead>
@@ -27,7 +27,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->stock }}</td>
-                                <td>{{ format_of_money($item->net_price) }}</td>
+                                <td>{{ format_of_money($item->selling_price) }}</td>
                                 <td width="12%">  
                                     <button type="button" class="btn btn-primary light px-3" onclick="selectProduct('{{ $item->id }}', '{{ $item->name }}')"><i class="fa fa-check-circle"></i> Pilih</button>
                                 </td>

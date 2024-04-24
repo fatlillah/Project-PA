@@ -71,7 +71,7 @@
                     <thead>
                         <tr>
                             <th class="center">No.</th>
-                            <th>Nama Produk</th>
+                            <th>Produk</th>
                             <th>Qty</th>
                             <th class="right">Harga Bersih</th>
                             <th class="center">Harga Jual</th>

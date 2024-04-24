@@ -3,12 +3,12 @@
      let table1, table2;
 
 $(function () {
-     table1 = $('.table-production-cost').DataTable({
+     table1 = $('.table-sales-list').DataTable({
             destroy: true,
             autoWidth: false,
             serverSide: true,
             ajax: {
-                url: '{{ route("produksi.data") }}'
+                url: '{{ route("daftar-penjualan.data") }}'
             },
             columns: [
                 {
@@ -20,16 +20,16 @@ $(function () {
                     data: 'date'
                 },
                 {
-                    data: 'production_theme'
-                },
-                {
-                    data: 'user'
-                },
-                {
                     data: 'total_item'
                 },
                 {
-                    data: 'grand_total'
+                    data: 'total_price'
+                },
+                {
+                    data: 'pay'
+                },
+                {
+                    data: 'user'
                 },
                 {
                     data: 'action',
@@ -38,7 +38,6 @@ $(function () {
                 },
             ]
         });
-        $('.table-production-themes').DataTable();
      table2 = $('.table-detail').DataTable({
             destroy:true,
             dom: 'Brt',
@@ -53,10 +52,10 @@ $(function () {
                     data: 'name'
                 },
                 {
-                    data: 'stock'
+                    data: 'amount'
                 },
                 {
-                    data: 'net_price'
+                    data: 'discount'
                 },
                 {
                     data: 'selling_price'
@@ -68,14 +67,9 @@ $(function () {
         });
     });
 
-    function addForm() {
-        $('#modal-production-theme').modal('show');
-        $('#modal-production-theme .modal-title').text('Tema Produksi');
-    }
-
     function showDetail(url) {
         $('#modal-detail').modal('show');
-        $('#modal-detail .modal-title').text('Detail Transaksi Biaya Produksi');
+        $('#modal-detail .modal-title').text('Detail Transaksi Penjualan');
         table2.ajax.url(url);
         table2.ajax.reload();
     }
@@ -91,7 +85,7 @@ $(function () {
                 },
                 success: function(res) {
                     if (res.status == 'success') {
-                        $('.table-production-cost').DataTable().ajax.reload();
+                        $('.table-sales-list').DataTable().ajax.reload();
                     }
                 },
                 error: function(err) {

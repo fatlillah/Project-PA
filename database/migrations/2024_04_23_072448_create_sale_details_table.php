@@ -13,19 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('production_cost_details', function (Blueprint $table) {
+        Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('production_id');
+            $table->unsignedBigInteger('sale_id');
             $table->unsignedBigInteger('product_id');
-            $table->string('stock')->nullable();
-            $table->string('net_price')->nullable();
-            $table->string('selling_price')->nullable();
+            $table->string('selling_price');
+            $table->string('amount');
+            $table->tinyInteger('discount')->nullable();
             $table->string('subtotal');
             $table->timestamps();
         });
 
-        Schema::table('production_cost_details', function ($table) {
-            $table->foreign('production_id')->references('id')->on('production_costs')->ondelete('cascade');
+        Schema::table('sale_details', function ($table) {
+            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('production_cost_details');
+        Schema::dropIfExists('sale_details');
     }
 };

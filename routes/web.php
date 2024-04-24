@@ -7,6 +7,8 @@ use App\Http\Controllers\Production_costController;
 use App\Http\Controllers\ProductionCostDetailController;
 use App\Http\Controllers\ProductionThemeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SaleDetailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,46 +32,64 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-// produk
-Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');
-Route::post('/produk/delete-selected', [ProductController::class, 'deleteSelected'])->name('produk.delete_selected');
-Route::resource('produk', ProductController::class);
+    // produk
+    Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');
+    Route::post('/produk/delete-selected', [ProductController::class, 'deleteSelected'])->name('produk.delete_selected');
+    Route::resource('produk', ProductController::class);
 
-// pengeluaran
-Route::get('/datatable/pengeluarans/data', [ExpenditureController::class, 'data'])->name('pengeluaran.data');
-Route::resource('pengeluaran', ExpenditureController::class);
+    // pengeluaran
+    Route::get('/datatable/pengeluarans/data', [ExpenditureController::class, 'data'])->name('pengeluaran.data');
+    Route::resource('pengeluaran', ExpenditureController::class);
 });
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // user manajemen
     Route::get('/datatable/users/data', [UserController::class, 'data'])->name('users.data');
     Route::resource('users', UserController::class);
-    
+
     // user profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-// kategori produk
+    // kategori produk
     Route::get('/datatable/kategoris/data', [CategoryController::class, 'data'])->name('kategori.data');
     Route::resource('kategori', CategoryController::class);
 
-// tema produksi
+    // tema produksi
     Route::get('/datatable/tema-produksis/data', [ProductionThemeController::class, 'data'])->name('tema-produksi.data');
     Route::resource('tema-produksi', ProductionThemeController::class);
 
-// biaya produksi
+    // biaya produksi
     Route::get('/produksi/create/{id}', [Production_costController::class, 'create'])->name('produksi.create');
     Route::get('/datatable/produksis/data', [Production_costController::class, 'data'])->name('produksi.data');
-    Route::get('/produksi/show', [Production_costController::class, 'show'])->name('produksi.show');
     Route::resource('produksi', Production_costController::class)
-        ->except('create', 'show');
+        ->except('create');
 
-// biaya produksi detail
+    // biaya produksi detail
     Route::get('/datatable/produksi-details/data/{id}', [ProductionCostDetailController::class, 'data'])->name('produksi-detail.data');
     Route::get('/produksi-detail/loadForm/{grand_total}', [ProductionCostDetailController::class, 'loadForm'])->name('produksi-detail.loadForm');
     Route::resource('produksi-detail', ProductionCostDetailController::class)
         ->except('create', 'show', 'edit');
-});
 
+    // transaksi penjualan
+    Route::get('/transaksi-penjualan/awal', [SaleController::class, 'create'])->name('transaksi-penjualan.awal');
+    Route::post('/transaksi-penjualan/save', [SaleController::class, 'store'])->name('transaksi-penjualan.save');
+    Route::get('/transaksi-penjualan/done', [SaleController::class, 'done'])->name('transaksi-penjualan.done');
+    
+    //transaksi penjualan detail
+    Route::get('/transaksi-penjualan/loadForm/{total}/{accepted}', [SaleDetailController::class, 'loadForm'])->name('transaksi-penjualan.loadForm');
+    Route::get('/transaksi-penjualan/data/{id}', [SaleDetailController::class, 'data'])->name('transaksi-penjualan.data');
+    Route::resource('transaksi-penjualan', SaleDetailController::class)
+    ->except('show');
+    
+    // daftar penjualan
+    Route::get('/daftar-penjualan/data', [SaleController::class, 'data'])->name('daftar-penjualan.data');
+    Route::get('/daftar-penjualan', [SaleController::class, 'index'])->name('daftar-penjualan.index');
+    Route::get('/daftar-penjualan/{id}', [SaleController::class, 'show'])->name('daftar-penjualan.show');
+    Route::delete('/daftar-penjualan/{id}', [SaleController::class, 'destroy'])->name('daftar-penjualan.destroy');
+
+    //laporan pendapatan
+    
+});
 require __DIR__ . '/auth.php';

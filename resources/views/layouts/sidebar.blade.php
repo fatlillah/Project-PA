@@ -31,12 +31,34 @@
             @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
             <li><a href="{{ url('pengeluaran') }}">Pengeluaran</a></li>
             @endif
+        </ul>
+        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            <i class="fa fa-sort"></i>
+            <span class="nav-text">Transaksi Jual</span>
+        </a>
+        <ul aria-expanded="false">
             @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
-            <li><a href="{{ url('penjualan') }}">Penjualan</a></li>
+            <li><a href="{{ url('transaksi-penjualan') }}">Transaksi Lama</a></li>
+            <li><a href="{{ url('transaksi-penjualan/awal') }}">Transaksi Baru</a></li>
+            @endif
+        </ul>
+        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            <i class="fa fa-sort"></i>
+            <span class="nav-text">Transaksi Pesanan</span>
+        </a>
+        <ul aria-expanded="false">
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
             <li><a href="{{ url('pemesanan') }}">Pemesanan</a></li>
             @endif
         </ul>
-    </li>
+        <li>
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
+            <a href="{{ url('/daftar-penjualan') }}" class="" aria-expanded="false">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">Daftar Penjualan</span>
+        </a>
+        @endif
+        </li>
     @if (auth()->user()->hasRole('admin'))
     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
         <i class="fa fa-cogs"></i>
