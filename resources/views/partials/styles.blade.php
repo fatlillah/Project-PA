@@ -7,3 +7,5 @@
 <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ url('assets/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ url('assets/vendor/nouislider/nouislider.min.css') }}">
+
+@stack('css')

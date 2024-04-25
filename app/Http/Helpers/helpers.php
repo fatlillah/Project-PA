@@ -15,7 +15,7 @@ function indonesian_date($dt, $perform_day = true)
     );
 
     $year   = substr($dt, 0, 4);
-    $month  = $name_month[(int) substr($dt, 5, 2)];
+    $month = $name_month[(int) substr($dt, 5, 2)] ?? '';
     $date   = substr($dt, 8, 2);
     $text   = '';
 

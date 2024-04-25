@@ -7,6 +7,7 @@ use App\Http\Controllers\Production_costController;
 use App\Http\Controllers\ProductionCostDetailController;
 use App\Http\Controllers\ProductionThemeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleDetailController;
 use App\Http\Controllers\UserController;
@@ -88,8 +89,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/daftar-penjualan', [SaleController::class, 'index'])->name('daftar-penjualan.index');
     Route::get('/daftar-penjualan/{id}', [SaleController::class, 'show'])->name('daftar-penjualan.show');
     Route::delete('/daftar-penjualan/{id}', [SaleController::class, 'destroy'])->name('daftar-penjualan.destroy');
-
+    
     //laporan pendapatan
+    Route::get('/laporan', [ReportController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/data/{awal}/{akhir}', [ReportController::class, 'data'])->name('laporan.data');
+    Route::get('/laporan/pdf/{awal}/{akhir}', [ReportController::class, 'exportPDF'])->name('laporan.export_pdf');
     
 });
 require __DIR__ . '/auth.php';

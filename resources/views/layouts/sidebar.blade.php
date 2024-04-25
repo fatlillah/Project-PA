@@ -53,12 +53,21 @@
         </ul>
         <li>
             @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
-            <a href="{{ url('/daftar-penjualan') }}" class="" aria-expanded="false">
-            <i class="fas fa-home"></i>
-            <span class="nav-text">Daftar Penjualan</span>
-        </a>
-        @endif
+                <a href="{{ url('/daftar-penjualan') }}" class="" aria-expanded="false">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">Daftar Penjualan</span>
+                </a>
+            @endif
         </li>
+        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            <i class="fa fa-sort"></i>
+            <span class="nav-text">Laporan</span>
+        </a>
+        <ul aria-expanded="false">
+            @if (auth()->user()->hasRole('admin'))
+            <li><a href="{{ url('laporan') }}">Laporan Pendapatan</a></li>
+            @endif
+        </ul>
     @if (auth()->user()->hasRole('admin'))
     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
         <i class="fa fa-cogs"></i>
