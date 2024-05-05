@@ -20,6 +20,9 @@
 	
 	<script src="{{ url('assets/vendor/owl-carousel/owl.carousel.js') }}"></script>
 
+	<!-- SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	<script>
 		$(document).ready(function() {
 			$("#show_hide_current_password a").on('click', function(event) {

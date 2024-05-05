@@ -92,19 +92,13 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="left"><label for="pay"><strong>Bayar</strong></label></td>
-                                            <td class="right">
-                                                <input type="text" class="form-control" id="payRp" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="left"><label for="accepted">Diterima</label></td>
+                                            <td class="left"><label for="accepted">Pembayaran</label></td>
                                             <td class="right">
                                                 <input type="number" class="form-control" id="accepted" name="accepted" name="accepted" value="{{ $sales->accepted ?? 0 }}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="left"><label for="money_changes"><strong>Kembali</strong></label></td>
+                                            <td class="left"><label for="money_changes"><strong>Kembalian</strong></label></td>
                                             <td class="right">
                                                 <input type="text" class="form-control" id="money_changes" name="money_changes" value="0" readonly>
                                             </td>

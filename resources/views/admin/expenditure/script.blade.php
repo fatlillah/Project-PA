@@ -22,11 +22,13 @@
                 {
                     data: 'nominal'
                 },
+                @if (auth()->user()->hasRole('admin'))
                 {
                     data: 'action',
                     searchable: false,
                     sortable: false
                 },
+                @endif
 
             ]
         });

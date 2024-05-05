@@ -15,7 +15,7 @@
             <div class="card-header">
                 <button type="button" onclick="addForm('{{ route('pengeluaran.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Pengeluaran</button>
             </div>
-            <div class="card-body">
+                 <div class="card-body">
                 <div class="table-responsive">
                     <table id="example3" class="display" style="min-width: 845px">
                         <thead>
@@ -24,7 +24,9 @@
                                 <th>Tanggal</th>
                                 <th>Keterangan</th>
                                 <th>Nominal</th>
+                                @if (auth()->user()->hasRole('admin'))
                                 <th>Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                     </table>

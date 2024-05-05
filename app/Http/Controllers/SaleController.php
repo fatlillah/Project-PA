@@ -75,7 +75,7 @@ class SaleController extends Controller
             $product->update();
         }
 
-        return redirect()->route('daftar-penjualan.index');
+        return redirect()->route('transaksi-penjualan.index');
     }
 
     public function show($id)
@@ -120,5 +120,18 @@ class SaleController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()], 500);
         }
+    }
+
+    public function nota()
+    {
+        $sales = Sale::find(session('sale_id'));
+        if (!$sales) {
+            abort(404);
+        }
+        $detail = Sale_detail::with('product')
+            ->where('sale_id', session('sale_id'))
+            ->get();
+
+        return view('admin.sales-transaction.nota', compact('sales', 'detail'));
     }
 }

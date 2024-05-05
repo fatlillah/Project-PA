@@ -29,7 +29,7 @@
                                 <td>{{ $item->stock }}</td>
                                 <td>{{ format_of_money($item->selling_price) }}</td>
                                 <td width="12%">  
-                                    <button type="button" class="btn btn-primary light px-3" onclick="selectProduct('{{ $item->id }}', '{{ $item->name }}')"><i class="fa fa-check-circle"></i> Pilih</button>
+                                    <button type="button" class="btn btn-primary light px-3" onclick="selectProduct('{{ $item->id }}', '{{ $item->name }}')" @if($item->stock <= 0) disabled @endif><i class="fa fa-check-circle"></i> Pilih</button>
                                 </td>
                             </tr>
                             @endforeach

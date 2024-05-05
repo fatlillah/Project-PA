@@ -49,7 +49,7 @@
             <div class="card-body">
                 <div class="row mb-5">
                     <div class="mt-4 col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <h6>User:</h6>
+                        <h6><strong>Operator: </strong></h6>
                         <div> <strong>{{ auth()->user()->name }}</strong> </div>
                         <div>{{ auth()->user()->email }}</div>
                     </div>
@@ -73,9 +73,9 @@
                             <th class="center">No.</th>
                             <th>Produk</th>
                             <th>Qty</th>
-                            <th class="right">Harga Bersih</th>
+                            <th class="right">Harga Modal</th>
                             <th class="center">Harga Jual</th>
-                            <th class="right">Subtotal</th>
+                            <th class="right">Sub Modal</th>
                             <th width="12%"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>

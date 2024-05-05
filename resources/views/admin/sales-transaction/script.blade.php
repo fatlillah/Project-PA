@@ -74,6 +74,39 @@
         $('.btn-submit').on('click', function() {
             $('#form-transaction').submit();
         });
+
+        $('#form-transaction').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    Swal.fire({
+                        title: 'Transaksi Berhasil Disimpan!',
+                        text: 'Apakah Anda ingin mencetak nota transaksi?',
+                        icon: 'success',
+                        showCancelButton: true,
+                        confirmButtonText: 'Cetak Nota',
+                        cancelButtonText: 'Tidak',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '{{ route('transaksi-penjualan.nota') }}';
+                        } else {
+                            window.location.href = '{{ route('transaksi-penjualan.awal') }}';
+                        }
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        title: 'Oops...',
+                        text: 'Terjadi kesalahan saat menyimpan transaksi!',
+                        icon: 'error',
+                    });
+                }
+            });
+        });
     });
 
 

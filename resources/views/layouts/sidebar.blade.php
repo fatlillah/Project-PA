@@ -8,32 +8,28 @@
             </li>
             
             <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                <i class="fa fa-bars"></i>
-                <span class="nav-text">Master</span>
-            </a>
-            <ul aria-expanded="false">
-                @if (auth()->user()->hasRole('admin'))
-                <li><a href="{{ url('kategori') }}">Kategori</a></li>
-                @endif
-                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
-                <li><a href="{{ url('produk') }}">Produk</a></li>
-                @endif
-            </ul>
-        </li>
-        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-            <i class="fa fa-sort"></i>
-            <span class="nav-text">Transaksi</span>
+                    <i class="fa fa-bars"></i>
+                    <span class="nav-text">Master</span>
+                </a>
+                <ul aria-expanded="false">
+                    @if (auth()->user()->hasRole('admin'))
+                    <li><a href="{{ url('kategori') }}">Kategori</a></li>
+                    @endif
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
+                    <li><a href="{{ url('produk') }}">Produk</a></li>
+                    @endif
+                </ul>
+            </li>
+        @if (auth()->user()->hasRole('admin'))
+        <li><a href="{{ url('produksi') }}" class="" aria-expanded="false">
+            <i class="fa fa-calculator"></i>
+            <span class="nav-text">Biaya Produksi</span>
         </a>
-        <ul aria-expanded="false">
-            @if (auth()->user()->hasRole('admin'))
-            <li><a href="{{ url('produksi') }}">Biaya Produksi</a></li>
-            @endif
-            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
-            <li><a href="{{ url('pengeluaran') }}">Pengeluaran</a></li>
-            @endif
-        </ul>
+        </li>
+        @endif
+       
         <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-            <i class="fa fa-sort"></i>
+            <i class="fa fa-shopping-cart"></i>
             <span class="nav-text">Transaksi Jual</span>
         </a>
         <ul aria-expanded="false">
@@ -43,7 +39,7 @@
             @endif
         </ul>
         <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-            <i class="fa fa-sort"></i>
+            <i class="fa fa-clipboard-list"></i>
             <span class="nav-text">Transaksi Pesanan</span>
         </a>
         <ul aria-expanded="false">
@@ -54,23 +50,30 @@
         <li>
             @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
                 <a href="{{ url('/daftar-penjualan') }}" class="" aria-expanded="false">
-                    <i class="fas fa-home"></i>
+                    <i class="fa fa-list-alt"></i>
                     <span class="nav-text">Daftar Penjualan</span>
                 </a>
             @endif
         </li>
+        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
+        <li><a href="{{ url('pengeluaran') }}" class="" aria-expanded="false">
+            <i class="fas fa-credit-card"></i>
+            <span class="nav-text">Pengeluaran</span>
+        </a>
+        </li>
+        @endif
+        @if (auth()->user()->hasRole('admin'))
         <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-            <i class="fa fa-sort"></i>
+            <i class="fa fa-chart-line"></i>
             <span class="nav-text">Laporan</span>
         </a>
         <ul aria-expanded="false">
-            @if (auth()->user()->hasRole('admin'))
             <li><a href="{{ url('laporan') }}">Laporan Pendapatan</a></li>
-            @endif
         </ul>
+        @endif
     @if (auth()->user()->hasRole('admin'))
     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-        <i class="fa fa-cogs"></i>
+        <i class="fa fa-cog"></i>
         <span class="nav-text">Pengaturan</span>
     </a>
     <ul aria-expanded="false">
