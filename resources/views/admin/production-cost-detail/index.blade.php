@@ -75,7 +75,7 @@
                             <th>Qty</th>
                             <th class="right">Harga Modal</th>
                             <th class="center">Harga Jual</th>
-                            <th class="right">Sub Modal</th>
+                            <th class="right">Subtotal Modal</th>
                             <th width="12%"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>

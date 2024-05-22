@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Production_costController;
@@ -29,9 +30,7 @@ Route::get('kasir', function () {
 })->middleware(['auth', 'verified', 'role:kasir']);
 
 Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     // produk
     Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');
@@ -57,6 +56,7 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::get('/daftar-penjualan/data', [SaleController::class, 'data'])->name('daftar-penjualan.data');
     Route::get('/daftar-penjualan', [SaleController::class, 'index'])->name('daftar-penjualan.index');
     Route::get('/daftar-penjualan/{id}', [SaleController::class, 'show'])->name('daftar-penjualan.show');
+    Route::put('/daftar-penjualan/{id}', [SaleController::class, 'update'])->name('daftar-penjualan.update');
     Route::delete('/daftar-penjualan/{id}', [SaleController::class, 'destroy'])->name('daftar-penjualan.destroy');
 
     // pengeluaran
@@ -92,7 +92,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     //laporan pendapatan
     Route::get('/laporan', [ReportController::class, 'index'])->name('laporan.index');
-    Route::get('/laporan/data/{awal}/{akhir}', [ReportController::class, 'data'])->name('laporan.data');
-    Route::get('/laporan/pdf/{awal}/{akhir}', [ReportController::class, 'exportPDF'])->name('laporan.export_pdf');
+    Route::get('/laporan/data/{start_date}/{last_date}', [ReportController::class, 'data'])->name('laporan.data');
+    Route::get('/laporan/pdf/{start_date}/{last_date}', [ReportController::class, 'exportPDF'])->name('laporan.export_pdf');
 });
 require __DIR__ . '/auth.php';

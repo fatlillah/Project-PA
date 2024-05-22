@@ -40,10 +40,8 @@
     <div class="col-lg-12">
 
         <div class="card mt-3">
-            <div class="card-header">
-                <span class="float-end">
-                    <strong>{{ indonesian_date(now(), false) }}</strong> 
-                </span> 
+            <div class="card-header"> <label class="label label-primary">{{ $sales->no_order }}</label>
+                <strong>{{ indonesian_date(now(), false) }}</strong> 
             </div>
             <div class="card-body">
                 <form id="form-product">

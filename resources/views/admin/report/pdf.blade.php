@@ -56,9 +56,9 @@
 		<h2>Laporan Pendapatan</h2>
 		<h2>Butik ResaAre</h2>
 		<p>
-			 {{ indonesian_date($awal, false) }}
-			s/d
-			 {{ indonesian_date($akhir, false) }}
+            {{ indonesian_date($start_date, false) }}
+            s/d
+            {{ indonesian_date($last_date, false) }}
 		</p>
         <hr>
         <table>

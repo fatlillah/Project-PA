@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="btn-group mb-1">
-                    <a href="{{ route('laporan.export_pdf', [$start_date, $last_date]) }}" class="btn btn-danger light px-3"><i class="fa fa-file-pdf"></i> Export PDF</a>
+                    <a href="{{ route('laporan.export_pdf', [$start_date, $last_date]) }}" class="btn btn-danger light px-3" id="export-pdf"><i class="fa fa-file-pdf"></i> Export PDF</a>
                 </div>                
             </div>
             <div class="card-body">
@@ -39,7 +39,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th >Tanggal</th>
-                                <th width="20%">Penjualan Bersih</th>
+                                <th width="20%">Biaya Produksi</th>
                                 <th>Penjualan</th>
                                 <th>Pengeluaran</th>
                                 <th>Pendapatan</th>

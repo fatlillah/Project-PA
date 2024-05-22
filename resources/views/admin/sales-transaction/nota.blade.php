@@ -123,7 +123,7 @@
             </div>
             <div class="right">
                 <ul>
-                    <li> No. Order</li>
+                    <li> {{ $sales->no_order }}</li>
                     <li> {{ $sales->user->name }} </li>
                     <li> {{ date('d M Y : H:i:s', strtotime($sales->created_at)) }} </li>
                 </ul>
