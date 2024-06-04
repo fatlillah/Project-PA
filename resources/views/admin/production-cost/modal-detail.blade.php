@@ -14,7 +14,7 @@
                                 <th width="15%">No</th>
                                 <th>Produk</th>
                                 <th>Stok</th>
-                                <th>Harga Bersih</th>
+                                <th>Harga Modal</th>
                                 <th>Harga Jual</th>
                                 <th>Subtotal</th>
                             </tr>

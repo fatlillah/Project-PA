@@ -44,6 +44,7 @@
         </a>
         <ul aria-expanded="false">
             @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
+            <li><a href="{{ url('transaksi-pemesanan/awal') }}">Pemesanan</a></li>
             @endif
         </ul>
         <li>

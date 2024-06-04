@@ -95,7 +95,7 @@
                             </div>
                     </form>
                     <div class="card-footer">
-                        <button class="btn btn-primary btn-submit" type="button">Simpan Transaksi</button>
+                        <button class="btn btn-primary btn-submit" type="button" style="float: right">Simpan Transaksi</button>
                     </div>
                 </div>
         </div>

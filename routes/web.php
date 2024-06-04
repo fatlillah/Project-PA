@@ -3,6 +3,9 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenditureController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\OrderDetailSizeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Production_costController;
 use App\Http\Controllers\ProductionCostDetailController;
@@ -59,6 +62,18 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::put('/daftar-penjualan/{id}', [SaleController::class, 'update'])->name('daftar-penjualan.update');
     Route::delete('/daftar-penjualan/{id}', [SaleController::class, 'destroy'])->name('daftar-penjualan.destroy');
 
+    // ukuran detail pesanan
+    Route::resource('ukuran-detail-pesanan', OrderDetailSizeController::class);
+
+    // transaksi pemesanan
+    Route::get('/transaksi-pemesanan/awal', [OrderController::class, 'create'])->name('transaksi-pemesanan.awal');
+    Route::get('/transaksi-pemesanan/nota', [OrderController::class, 'nota'])->name('transaksi-pemesanan.nota');
+
+    // transaksi pemesanan detail
+    Route::get('/transaksi-pemesanan/loadForm/{DP}', [OrderDetailController::class, 'loadForm'])->name('transaksi-pemesanan.loadForm');
+    Route::get('/transaksi-pemesanan/data/{id}', [OrderDetailController::class, 'data'])->name('transaksi-pemesanan.data');
+    Route::resource('transaksi-pemesanan', OrderDetailController::class);
+        
     // pengeluaran
     Route::get('/datatable/pengeluarans/data', [ExpenditureController::class, 'data'])->name('pengeluaran.data');
     Route::resource('pengeluaran', ExpenditureController::class);

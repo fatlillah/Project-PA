@@ -48,7 +48,7 @@ class SaleController extends Controller
     public function create()
     {
         $lastOrder = Sale::orderBy('id', 'desc')->first();
-        $orderNumber = 'RES' . date('ymd') . str_pad(($lastOrder ? ((int)substr($lastOrder->no_order, -4)) + 1 : 1), 4, '0', STR_PAD_LEFT);
+        $orderNumber = 'RES' . date('dmy') . str_pad(($lastOrder ? ((int)substr($lastOrder->no_order, -4)) + 1 : 1), 4, '0', STR_PAD_LEFT);
 
         $sale = new Sale();
         $sale->no_order = $orderNumber;

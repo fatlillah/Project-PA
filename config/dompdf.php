@@ -11,6 +11,8 @@ return array(
     | in dompdf_config.inc.php. You can also override the entire config file.
     |
     */
+    'public_path' => base_path('public'),
+
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
 
     'public_path' => null,  // Override the public path if needed
