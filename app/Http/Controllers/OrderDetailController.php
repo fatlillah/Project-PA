@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Order_detail_size;
@@ -12,9 +13,10 @@ class OrderDetailController extends Controller
     public function index()
     {
         $orderDetailSize = Order_detail_size::orderBy('customer', 'desc')->get();
+        $customers = Customer::all();
         if ($order_id = session('order_id')) {
             $orders = Order::find($order_id);
-            return view('admin.orders-transaction.index', compact('orderDetailSize', 'order_id', 'orders'));
+            return view('admin.orders-transaction.index', compact('orderDetailSize', 'order_id', 'orders', 'customers'));
         }
     }
 
@@ -42,22 +44,6 @@ class OrderDetailController extends Controller
             ->rawColumns(['action', 'name_product', 'amount'])
             ->make(true);
         return $dataOrderDetail;
-    }
-
-    public function store(Request $request)
-    {
-        $orders = Order::findOrFail($request->order_id);
-        $total_item = Order_detail::where('order_id', $request->order_id)->sum('amount');
-
-        $orders->name_order = $request->name_order;
-        $orders->phone = $request->phone;
-        $orders->deadline = $request->deadline;
-        $orders->total_item = $total_item;  
-        $orders->DP = $request->DP;
-        $orders->credit = $request->credit;
-        $orders->update();
-
-        return response()->json(['status' => 'success']);
     }
 
     public function update(Request $request, $id)

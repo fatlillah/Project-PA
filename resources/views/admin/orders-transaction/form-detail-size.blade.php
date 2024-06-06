@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label" for="customer"><strong>Pemilik</strong></label>
+                        <label class="col-sm-3 col-form-label" for="customer"><strong>Pemilik</strong> (Opsional)</label>
                         <div class="col-sm-9">
                             <input type="text" name="customer" id="customer" class="form-control @error('customer') is-invalid @enderror">
                         @error('customer')
@@ -79,12 +79,12 @@
                                 <tr>
                                     <td colspan="4">
                                         <div class="form-floating">
-                                            <textarea class="form-control @error('length_face') is-invalid @enderror" placeholder="Leave a comment here" id="desc" name="desc" style="height: 100px"></textarea>
+                                            <textarea class="form-control @error('desc') is-invalid @enderror" placeholder="Leave a comment here" id="desc" name="desc" style="height: 100px"></textarea>
                                             <label for="desc">Catatan</label>
                                             @error('desc')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
-                                          </div>
+                                        </div>
                                     </td>
                                 </tr>
                           

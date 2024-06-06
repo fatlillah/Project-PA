@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\OrderController;
@@ -39,6 +40,10 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');
     Route::post('/produk/delete-selected', [ProductController::class, 'deleteSelected'])->name('produk.delete_selected');
     Route::resource('produk', ProductController::class);
+    
+    //pelanggan
+    Route::get('/datatable/pelanggans/data', [CustomerController::class, 'data'])->name('pelanggan.data');
+    Route::resource('pelanggan', CustomerController::class);
 
     // tema produksi
     Route::get('/datatable/tema-produksis/data', [ProductionThemeController::class, 'data'])->name('tema-produksi.data');
@@ -67,6 +72,7 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
 
     // transaksi pemesanan
     Route::get('/transaksi-pemesanan/awal', [OrderController::class, 'create'])->name('transaksi-pemesanan.awal');
+    Route::post('/transaksi-pemesanan/save', [OrderController::class, 'store'])->name('transaksi-pemesanan.save');
     Route::get('/transaksi-pemesanan/nota', [OrderController::class, 'nota'])->name('transaksi-pemesanan.nota');
 
     // transaksi pemesanan detail
@@ -74,6 +80,12 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::get('/transaksi-pemesanan/data/{id}', [OrderDetailController::class, 'data'])->name('transaksi-pemesanan.data');
     Route::resource('transaksi-pemesanan', OrderDetailController::class);
         
+    // daftar pemesanan
+    Route::get('/daftar-pemesanan/data', [OrderController::class, 'data'])->name('daftar-pemesanan.data');
+    Route::get('/daftar-pemesanan', [OrderController::class, 'index'])->name('daftar-pemesanan.index');
+    Route::get('/daftar-pemesanan/{id}', [OrderController::class, 'show'])->name('daftar-pemesanan.show');
+    Route::delete('/daftar-pemesanan/{id}', [OrderController::class, 'destroy'])->name('daftar-pemesanan.destroy');
+
     // pengeluaran
     Route::get('/datatable/pengeluarans/data', [ExpenditureController::class, 'data'])->name('pengeluaran.data');
     Route::resource('pengeluaran', ExpenditureController::class);

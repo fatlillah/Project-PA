@@ -16,18 +16,17 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('no_order');
-            $table->string('name_order');
-            $table->string('phone');
+            $table->unsignedBigInteger('customer_id');
             $table->string('deadline');
             $table->string('total_item');
             $table->string('DP');
-            $table->string('credit');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
 
         Schema::table('orders', function ($table) {
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 
