@@ -3,7 +3,7 @@
 @section('header-content')
 <div class="header-left">
     <div class="dashboard_bar">
-        Data Pesanan
+        Daftar Pesanan Selesai
     </div>
 </div>
 @endsection
@@ -12,9 +12,6 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
-                <button type="button" onclick="addForm()" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Pesanan</button>
-            </div>
             <div class="card-body">
                 <form id="form-order">
                     @csrf
@@ -46,6 +43,5 @@
 </div>
 
 @include('admin.order-completed.form')
-@include('admin.order-completed.modal-order')
 @endsection
 @include('admin.order-completed.script')

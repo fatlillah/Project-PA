@@ -30,7 +30,7 @@
         @endif
        
         <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-            <i class="fa fa-shopping-cart"></i>
+            <i class="fas fa-cash-register"></i>
             <span class="nav-text">Transaksi</span>
         </a>
             <ul aria-expanded="false">
@@ -41,7 +41,7 @@
             </ul>
         </li>
         <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-            <i class="fa fa-clipboard-list"></i>
+            <i class="fas fa-file-invoice"></i>
             <span class="nav-text">Daftar Transaksi</span>
         </a>
         <ul aria-expanded="false">
@@ -53,13 +53,13 @@
         </li>
         @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
         <li><a href="{{ url('pesanan-selesai') }}" class="" aria-expanded="false">
-            <i class="fas fa-credit-card"></i>
+            <i class="fas fa-shopping-cart"></i>
             <span class="nav-text">Pesanan Selesai</span>
         </a>
         </li>
         @endif
         <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-            <i class="fa fa-clipboard-list"></i>
+            <i class="far fa-credit-card"></i>
             <span class="nav-text">Kredit</span>
         </a>
         <ul aria-expanded="false">
@@ -72,7 +72,7 @@
         </li>
         @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
         <li><a href="{{ url('pengeluaran') }}" class="" aria-expanded="false">
-            <i class="fas fa-credit-card"></i>
+            <i class="fas fa-receipt"></i>
             <span class="nav-text">Pengeluaran</span>
         </a>
         </li>

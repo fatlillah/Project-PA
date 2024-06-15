@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Completed_order;
 use App\Models\Order;
-use App\Models\Order_detail;
 use Illuminate\Http\Request;
 
 class CompletedOrderController extends Controller
@@ -41,23 +40,6 @@ class CompletedOrderController extends Controller
             ->make(true);
 
         return $dataOrderCompleted;
-    }
-
-
-    public function store(Request $request)
-    {
-        $orders = Order::where('id', $request->completed_order_id)->get();
-
-        if ($orders->isEmpty()) {
-            // return response()->json('Data gagal disimpan', 404);
-        }
-
-        foreach ($orders as $order) {
-            $complit = new Completed_order();
-            $complit->completed_order_id = $order->id;
-            $complit->price = 0;
-            $complit->save();
-        }
     }
 
     public function show($id)

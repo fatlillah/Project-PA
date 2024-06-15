@@ -79,6 +79,7 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::get('/transaksi-pemesanan/awal', [OrderController::class, 'create'])->name('transaksi-pemesanan.awal');
     Route::post('/transaksi-pemesanan/save', [OrderController::class, 'store'])->name('transaksi-pemesanan.save');
     Route::get('/transaksi-pemesanan/nota', [OrderController::class, 'nota'])->name('transaksi-pemesanan.nota');
+    Route::post('/orders/update-status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
 
     // transaksi pemesanan detail
     Route::get('/transaksi-pemesanan/loadForm/{DP}', [OrderDetailController::class, 'loadForm'])->name('transaksi-pemesanan.loadForm');
