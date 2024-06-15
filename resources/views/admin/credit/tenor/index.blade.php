@@ -3,7 +3,7 @@
 @section('header-content')
 <div class="header-left">
     <div class="dashboard_bar">
-        Pelanggan
+        Tenor
     </div>
 </div>
 @endsection
@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <button type="button" onclick="addCustomer('{{ route('pelanggan.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Pelanggan Baru</button>
+                <button type="button" onclick="addForm('{{ route('tenor.store') }}')" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Tenor</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -21,9 +21,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama</th>
-                                <th>No. Telp</th>
-                                <th>Alamat</th>
+                                <th>Tenor</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -34,6 +32,6 @@
     </div>
 </div>
 
-@include('admin.customer.form')
+@include('admin.credit.tenor.form')
 @endsection
-@include('admin.customer.script')
+@include('admin.credit.tenor.script')

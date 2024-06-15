@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompletedOrderController;
+use App\Http\Controllers\CreditController;
+use App\Http\Controllers\CreditPaymentController;
+use App\Http\Controllers\CreditPaymentDetailController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenditureController;
@@ -15,6 +19,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleDetailController;
+use App\Http\Controllers\TenorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +45,7 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');
     Route::post('/produk/delete-selected', [ProductController::class, 'deleteSelected'])->name('produk.delete_selected');
     Route::resource('produk', ProductController::class);
-    
+
     //pelanggan
     Route::get('/datatable/pelanggans/data', [CustomerController::class, 'data'])->name('pelanggan.data');
     Route::resource('pelanggan', CustomerController::class);
@@ -79,7 +84,7 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::get('/transaksi-pemesanan/loadForm/{DP}', [OrderDetailController::class, 'loadForm'])->name('transaksi-pemesanan.loadForm');
     Route::get('/transaksi-pemesanan/data/{id}', [OrderDetailController::class, 'data'])->name('transaksi-pemesanan.data');
     Route::resource('transaksi-pemesanan', OrderDetailController::class);
-        
+
     // daftar pemesanan
     Route::get('/daftar-pemesanan/data', [OrderController::class, 'data'])->name('daftar-pemesanan.data');
     Route::get('/daftar-pemesanan', [OrderController::class, 'index'])->name('daftar-pemesanan.index');
@@ -121,5 +126,24 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/laporan', [ReportController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/data/{start_date}/{last_date}', [ReportController::class, 'data'])->name('laporan.data');
     Route::get('/laporan/pdf/{start_date}/{last_date}', [ReportController::class, 'exportPDF'])->name('laporan.export_pdf');
+
+    // tenor
+    Route::get('/datatable/tenors/data', [TenorController::class, 'data'])->name('tenor.data');
+    Route::resource('tenor', TenorController::class);
+
+    // Pesanan selesai
+    Route::get('/datatable/pesanan-selesais/data', [CompletedOrderController::class, 'data'])->name('pesanan-selesai.data');
+    Route::resource('pesanan-selesai', CompletedOrderController::class);
+
+    //data kredit
+    Route::get('/datatable/data-kredits/data', [CreditController::class, 'data'])->name('data-kredit.data');
+    Route::resource('data-kredit', CreditController::class);
+
+    // pembayaran kredit
+    Route::resource('pembayaran-kredit', CreditPaymentController::class);
+    
+    // pembayaran kredit detail
+    Route::post('/pembayaran-kredit-detail/status-bayar/{id}', [CreditPaymentDetailController::class, 'updateStatus'])->name('pembayaran-kredit-detail.updateStatus');
+    Route::resource('pembayaran-kredit-detail', CreditPaymentDetailController::class);
 });
 require __DIR__ . '/auth.php';

@@ -52,6 +52,25 @@
         </ul>
         </li>
         @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
+        <li><a href="{{ url('pesanan-selesai') }}" class="" aria-expanded="false">
+            <i class="fas fa-credit-card"></i>
+            <span class="nav-text">Pesanan Selesai</span>
+        </a>
+        </li>
+        @endif
+        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            <i class="fa fa-clipboard-list"></i>
+            <span class="nav-text">Kredit</span>
+        </a>
+        <ul aria-expanded="false">
+            @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
+            <li><a href="{{ url('tenor') }}">Tenor</a></li>
+            <li><a href="{{ url('data-kredit') }}">Data Angsuran</a></li>
+            <li><a href="{{ url('pembayaran-kredit') }}">Data Pembayaran</a></li>
+            @endif
+        </ul>
+        </li>
+        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
         <li><a href="{{ url('pengeluaran') }}" class="" aria-expanded="false">
             <i class="fas fa-credit-card"></i>
             <span class="nav-text">Pengeluaran</span>
