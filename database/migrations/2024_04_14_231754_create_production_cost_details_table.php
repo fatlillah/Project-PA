@@ -25,7 +25,7 @@ return new class extends Migration
         });
 
         Schema::table('production_cost_details', function ($table) {
-            $table->foreign('production_id')->references('id')->on('production_costs');
+            $table->foreign('production_id')->references('id')->on('production_costs')->ondelete('cascade');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }

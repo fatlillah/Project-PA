@@ -37,7 +37,7 @@ class Production_costController extends Controller
                 return $production->production_themes->name;
             })
             ->addColumn('user', function ($production) {
-                return $production->user->name;
+                return $production->user->name ?? '';
             })
             ->addColumn('grand_total', function ($production) {
                 return format_of_money($production->grand_total);

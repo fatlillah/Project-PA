@@ -22,17 +22,27 @@
                 {
                     data: 'nominal'
                 },
+                @if (auth()->user()->hasRole('admin'))
                 {
                     data: 'action',
                     searchable: false,
                     sortable: false
                 },
+                @endif
 
             ]
         });
 
+        $('#modal-add-expenses').on('hidden.bs.modal', function () {
+            $('#add-expenses-form').trigger('reset'); // Reset form fields
+            $('.is-invalid').removeClass('is-invalid'); // Remove error styling
+            $('.invalid-feedback').remove(); // Remove error messages
+        });
+
         $('#modal-add-expenses').on('submit', function(e) {
             e.preventDefault();
+            $('.is-invalid').removeClass('is-invalid'); // Remove previous error styling
+            $('.invalid-feedback').remove(); // Remove previous error messages
             $.ajax({
                 url: $('#add-expenses-form').attr('action'),
                 type: 'post',
@@ -45,11 +55,15 @@
                     }
                 },
                 error: function(err) {
-                    let error = err.responseJSON;
+                let error = err.responseJSON;
+                if (error.errors) {
                     $.each(error.errors, function(index, value) {
-                        $('.errMsgContainer').append('<span class="text-danger">' + value + '</span>');
+                        $('#add-expenses-form [name="' + index + '"]').addClass('is-invalid').after('<div class="invalid-feedback">' + value + '</div>');
                     });
+                } else {
+                    alert('Terjadi kesalahan saat memproses permintaan.');
                 }
+            }
             })
 
         })

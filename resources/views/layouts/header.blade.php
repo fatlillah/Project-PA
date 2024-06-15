@@ -6,7 +6,8 @@
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown  header-profile">
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                                    <img src="{{ url('assets/images/user.jpg') }}" width="56" alt="">
+                                    @php($profile_image = auth()->user()->profile_image)
+                                    <img id="header_profile_image" src="@if($profile_image == null) {{ asset("storage/profile_images/avatar.png") }}  @else {{ asset("storage/$profile_image") }} @endif" width="56" alt="">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a href="{{ route('profile.edit') }}" class="dropdown-item ai-icon">
@@ -35,3 +36,6 @@
                 </nav>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+        <script src="{{ url('assets/js/profile-update.js') }}"></script>

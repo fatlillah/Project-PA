@@ -7,3 +7,8 @@
 <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ url('assets/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ url('assets/vendor/nouislider/nouislider.min.css') }}">
+<!-- SweetAlert CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+
+@stack('css')

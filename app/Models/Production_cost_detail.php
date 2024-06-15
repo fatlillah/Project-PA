@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Production_cost_detail extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
     protected $guarded = [];
 
     public function product()

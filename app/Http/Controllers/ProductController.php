@@ -73,6 +73,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'category_id' => 'required',
+        ], [
+            'name.required' => 'Nama product wajib diisi',
+            'category_id.required' => 'Kategori wajib dipilih',
+        ]);
+
         Product::create($request->all());
         return response()->json([
             'status' => 'success',
@@ -113,12 +121,12 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         //validasi
-        // $this->validate($request, [
-        //     'name' => 'required|unique:categories'
-        // ], [
-        //     'name.required' => 'Nama product wajib diisi',
-        //     'name.unique' => 'Nama product yang dimasukkan sudah ada',
-        // ]);
+        $this->validate($request, [
+            'name' => 'required|unique:categories'
+        ], [
+            'name.required' => 'Nama product wajib diisi',
+            'name.unique' => 'Nama product yang dimasukkan sudah ada',
+        ]);
 
         $product->update($request->all());
         return response()->json([
@@ -145,7 +153,7 @@ class ProductController extends Controller
 
     public function deleteSelected(Request $request)
     {
-        foreach($request->id as $id){
+        foreach ($request->id as $id) {
             $product = Product::find($id);
             $product->delete();
         }

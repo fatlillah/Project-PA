@@ -25,8 +25,6 @@
             </div>            
             <div class="card-body">
                 <div class="table-responsive">
-                    <form action="" class="form-product">
-                        @csrf
                         <table id="example4" class="display table-production-cost" style="min-width: 845px">
                             <thead>
                                 <tr>
@@ -40,7 +38,6 @@
                                 </tr>
                             </thead>
                         </table>
-                    </form>
                 </div>
             </div>
         </div>

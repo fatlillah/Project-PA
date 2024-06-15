@@ -1,7 +1,8 @@
 @push('scripts')
 <script>
-    let table1, table2;
-$(document).ready(function() {
+     let table1, table2;
+
+$(function () {
      table1 = $('.table-production-cost').DataTable({
             destroy: true,
             autoWidth: false,
@@ -37,15 +38,11 @@ $(document).ready(function() {
                 },
             ]
         });
+        $('.table-production-themes').DataTable();
      table2 = $('.table-detail').DataTable({
-            destroy: true,
-            autoWidth: false,
-            serverSide: true,
+            destroy:true,
             dom: 'Brt',
             bSort: false,
-            ajax: {
-                url: '{{ route("produksi.data") }}'
-            },
             columns: [
                 {
                     data: 'DT_RowIndex',
@@ -69,8 +66,6 @@ $(document).ready(function() {
                 },
             ]
         });
-       
-
     });
 
     function addForm() {
@@ -81,8 +76,8 @@ $(document).ready(function() {
     function showDetail(url) {
         $('#modal-detail').modal('show');
         $('#modal-detail .modal-title').text('Detail Transaksi Biaya Produksi');
-        table2.DataTable().ajax.url(url);
-        table2.DataTable().ajax.reload();
+        table2.ajax.url(url);
+        table2.ajax.reload();
     }
 
 

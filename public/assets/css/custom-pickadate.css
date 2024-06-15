@@ -1,0 +1,44 @@
+/* Custom Pickadate Styles */
+.picker__holder {
+    width: auto !important;
+}
+
+.picker__frame {
+    padding: 20px; /* Better spacing */
+    border-radius: 8px; /* Rounded corners for a better look */
+}
+
+.picker__select--month, .picker__select--year {
+    padding: 0px; /* Add padding inside dropdowns */
+    border-radius: 5px; /* Rounded corners */
+    margin: 5px; /* Remove margin */
+}
+
+.picker__select--month {
+    width: auto; /* Auto width for dropdown */
+    min-width: 90px; /* Minimum width for month dropdown */
+}
+
+.picker__select--year {
+    width: auto; /* Auto width for dropdown */
+    min-width: 90px; /* Minimum width for year dropdown */
+}
+
+/* Ensure the dropdown aligns properly */
+.picker__header {
+    display: flex;
+    justify-content: center; /* Center align */
+    align-items: center;
+}
+
+/* Adjust font size for better readability */
+.picker__select--month, .picker__select--year {
+    font-size: 15px;
+}
+
+/* Container to group month and year selectors closer */
+.picker__header .picker__selectors {
+    display: flex;
+    gap: 5px; /* Add some gap for spacing */
+    align-items: center; /* Align items to the center */
+}

@@ -43,13 +43,13 @@
             <div class="card-header">
                 <label class="label label-primary">{{ $prod_themes->name }}</label>
                 <span class="float-end">
-                    <strong>01/01/01/2024</strong> 
+                    <strong>{{ indonesian_date(now(), false) }}</strong> 
                 </span> 
             </div>
             <div class="card-body">
                 <div class="row mb-5">
                     <div class="mt-4 col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <h6>User:</h6>
+                        <h6><strong>Operator: </strong></h6>
                         <div> <strong>{{ auth()->user()->name }}</strong> </div>
                         <div>{{ auth()->user()->email }}</div>
                     </div>
@@ -71,11 +71,11 @@
                     <thead>
                         <tr>
                             <th class="center">No.</th>
-                            <th>Nama Produk</th>
+                            <th>Produk</th>
                             <th>Qty</th>
-                            <th class="right">Harga Bersih</th>
+                            <th class="right">Harga Modal</th>
                             <th class="center">Harga Jual</th>
-                            <th class="right">Subtotal</th>
+                            <th class="right">Subtotal Modal</th>
                             <th width="12%"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
@@ -95,7 +95,7 @@
                             </div>
                     </form>
                     <div class="card-footer">
-                        <button class="btn btn-primary btn-submit" type="button">Simpan Transaksi</button>
+                        <button class="btn btn-primary btn-submit" type="button" style="float: right">Simpan Transaksi</button>
                     </div>
                 </div>
         </div>

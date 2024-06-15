@@ -12,9 +12,10 @@
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label class="form-label" for="name">Tema Produksi</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Tema produksi">
-                        <div class="errMsgContainer">
-                        </div>
+                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Tema produksi">
+                        @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">

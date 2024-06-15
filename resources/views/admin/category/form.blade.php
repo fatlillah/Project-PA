@@ -6,15 +6,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="addModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label class="form-label" for="name">Kategori</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Kategori">
-                        <div class="errMsgContainer">
-                        </div>
+                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Kategori">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -12,7 +12,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Produk</th>
+                                <th>Produk</th>
                                 <th>Stok</th>
                                 <th>Harga Bersih</th>
                                 <th width="12%"><i class="fa fa-cog"></i></th>

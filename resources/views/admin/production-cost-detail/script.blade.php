@@ -66,9 +66,7 @@
             'selling_price': selling_price,
         })
             .done(response => {
-                // $(this).on('mouseout', function () {
                     $('.table-production').DataTable().ajax.reload();
-                // });
             })
             .fail(errors => {
                 alert('Tidak dapat menyimpan data');

@@ -8,13 +8,13 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table id="example3" class="display table-detail">
+                    <table class="display table-detail">
                         <thead>
                             <tr>
                                 <th width="15%">No</th>
-                                <th>Nama Produk</th>
+                                <th>Produk</th>
                                 <th>Stok</th>
-                                <th>Harga Bersih</th>
+                                <th>Harga Modal</th>
                                 <th>Harga Jual</th>
                                 <th>Subtotal</th>
                             </tr>
@@ -25,3 +25,20 @@
         </div>
     </div>
 </div>
+@push('scripts')
+{{-- <style>
+    /* Custom CSS to adjust modal width */
+    @media (min-width: 768px) {
+        .modal-dialog {
+            max-width: calc(100% - 20px); /* Set the maximum width */
+        }
+    }
+
+    @media (min-width: 992px) {
+        .modal-dialog {
+            max-width: calc(70% - 70px); /* Adjust maximum width for larger screens */
+        }
+    }
+</style> --}}
+    
+@endpush

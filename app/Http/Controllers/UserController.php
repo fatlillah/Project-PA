@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,25 +16,30 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index');
+        $roles = Role::all();
+        return view('admin.users.index', compact('roles'));
     }
     public function data()
     {
         // dd('coba');
-        $user = User::orderBy('id', 'desc')->get();
-        $dataCategory = datatables()
-            ->of($user)
+        $users = User::orderBy('id', 'desc')->get();
+        $dataUser = datatables()
+            ->of($users)
             ->addIndexColumn()
-            ->addColumn('action', function ($user) {
+            ->addColumn('role', function ($users) {
+                return '<span class="badge light badge-primary">' . $users->getRoleNames()->first() . '</span>';
+            })
+            ->addColumn('action', function ($users) {
                 return '
                 <div class="d-flex">
-                <a onclick="editForm(`' . route('user.update', $user->id) . '`)" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                <a onclick="deleteData(`' . route('user.destroy', $user->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                <a onclick="editForm(`' . route('users.update', $users->id) . '`)" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                <a onclick="deleteData(`' . route('users.destroy', $users->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                 </div>
                 ';
             })
+            ->rawColumns(['action', 'role'])
             ->make(true);
-        return $dataCategory;
+        return $dataUser;
     }
 
     /**
@@ -53,20 +60,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //validasi
         $this->validate($request, [
-            'name' => 'required|unique:categories'
-        ], [
-            'name.required' => 'Kategori wajib diisi',
-            'name.unique' => 'Kategori yang dimasukkan sudah ada',
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'role' => 'required'
         ]);
 
-        // $aliasname = 'als_' . $request->name;
-        // $harga_jual = $request->harga_bersih + 100000 ;
-        User::create([
-            'name' => $request->name,
-            // 'alias_name' => $aliasname
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        $role = Role::findById($request->role);
+        $user->assignRole($role);
+
         return response()->json([
             'status' => 'success',
         ]);
@@ -80,8 +89,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return response()->json($user);
+        $users = User::find($id);
+        return response()->json($users);
     }
 
     /**
@@ -104,19 +113,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        //validasi
-        $this->validate($request, [
-            'name' => 'required|unique:categories'
-        ], [
-            'name.required' => 'Kategori wajib diisi',
-            'name.unique' => 'Kategori yang dimasukkan sudah ada',
+        $user = User::findOrFail($id);
+
+        // Validasi inputan
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'. $id,
+            'role' => 'required|exists:roles,name'
         ]);
-    
-        $input = [
-            'name' => $request->name,
-        ];
-        $user->update($input);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->roles()->detach();
+        $role = Role::where('name', $request->role)->first();
+        $user->assignRole($role);
+        $user->update();
+
         return response()->json([
             'status' => 'success',
         ]);
@@ -131,12 +144,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         try {
-            $user = User::find($id);
-            $user->delete();
+            $users = User::find($id);
+            $users->delete();
             return response()->json(['status' => 'success']);
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()], 500);
-            
         }
     }
 }
