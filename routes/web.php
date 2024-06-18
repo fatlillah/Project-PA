@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CashPaymentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompletedOrderController;
 use App\Http\Controllers\CreditController;
@@ -146,5 +147,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // pembayaran kredit detail
     Route::post('/pembayaran-kredit-detail/status-bayar/{id}', [CreditPaymentDetailController::class, 'updateStatus'])->name('pembayaran-kredit-detail.updateStatus');
     Route::resource('pembayaran-kredit-detail', CreditPaymentDetailController::class);
+    
+    // pembayaran cash
+    Route::post('/pembayaran-cash/update-discount', [CashPaymentController::class, 'updateDiscount'])->name('pembayaran-cash.updateDiscount');
+    Route::get('/pembayaran-cash/data/{id}', [CashPaymentController::class, 'data'])->name('pembayaran-cash.data');
+    Route::resource('pembayaran-cash', CashPaymentController::class);
+
 });
 require __DIR__ . '/auth.php';

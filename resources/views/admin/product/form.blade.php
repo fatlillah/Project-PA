@@ -38,8 +38,8 @@
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label class="form-label" for="net_price">Harga Bersih</label>
-                            <input type="text" name="net_price" id="net_price" class="form-control @error('net_price') is-invalid @enderror" placeholder="Harga Bersih">
+                            <label class="form-label" for="net_price">Harga Modal</label>
+                            <input type="text" name="net_price" id="net_price" class="form-control @error('net_price') is-invalid @enderror" placeholder="Harga Modal">
                             @error('net_price')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
