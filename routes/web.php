@@ -153,5 +153,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/pembayaran-cash/data/{id}', [CashPaymentController::class, 'data'])->name('pembayaran-cash.data');
     Route::resource('pembayaran-cash', CashPaymentController::class);
 
+
+
+
+Route::get('/nota/print/{id}', [CreditPaymentDetailController::class, 'printNota'])->name('nota.print');
+
+    
 });
 require __DIR__ . '/auth.php';
