@@ -12,15 +12,18 @@ $(function () {
             },
             columns: [
                 {
+                    data: 'action'
+                },
+                {
                     data: 'DT_RowIndex',
                     searchable: false,
                     sortable: false
                 },
                 {
-                    data: 'date'
+                    data: 'no_order'
                 },
                 {
-                    data: 'no_order'
+                    data: 'date'
                 },
                 {
                     data: 'customer'
@@ -35,12 +38,10 @@ $(function () {
                     data: 'DP'
                 },
                 {
-                    data: 'user'
+                    data: 'status'
                 },
                 {
-                    data: 'action',
-                    searchable: false,
-                    sortable: false
+                    data: 'user'
                 },
             ]
         });
@@ -103,10 +104,9 @@ $(function () {
 
 function showDetail(url) {
     $.ajax({
-        url: url, // Adjust URL according to your route
+        url: url, 
         type: 'GET',
         success: function(response) {
-            // Assuming 'response' contains the HTML to populate the modal body
             $('#modal-detail-body').html(response);
             $('#modal-detail').modal('show');
         },
@@ -117,10 +117,18 @@ function showDetail(url) {
     });
 }
 
-
-
-    function deleteData(url) {
-        if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+function deleteData(url) {
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Data tidak dapat dipulihkan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
             $.ajax({
                 url: url,
                 type: 'DELETE',
@@ -129,14 +137,66 @@ function showDetail(url) {
                 },
                 success: function(res) {
                     if (res.status == 'success') {
+                        Swal.fire(
+                            'Sukses!',
+                            'Data berhasil dihapus.',
+                            'success'
+                        );
                         $('.table-orders-list').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Gagal!',
+                            'Gagal menghapus data.',
+                            'error'
+                        );
                     }
                 },
                 error: function(err) {
-                    alert('Gagal menghapus data.');
+                    Swal.fire(
+                        'Error!',
+                        'Terjadi kesalahan. Silakan coba lagi.',
+                        'error'
+                    );
                 }
             });
         }
-    }
+    });
+}
+
+    function updateStatus(orderId, status) {
+    $.ajax({
+        url: '{{ route('orders.update-status') }}',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            order_id: orderId,
+            status: status
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sukses',
+                    text: 'Status berhasil diperbarui.',
+                });
+                $('.table-orders-list').DataTable().ajax.reload();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Gagal memperbarui status.',
+                });
+            }
+        },
+        error: function(xhr) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Terjadi kesalahan. Silakan coba lagi.',
+            });
+        }
+    });
+}
+
 </script>
 @endpush

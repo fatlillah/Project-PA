@@ -69,7 +69,7 @@
         $('#modal-add-tenor [name=name]').focus();
     }
 
-    function editForm(url) {
+    function editTenor(url) {
         $('#modal-add-tenor').modal('show');
         $('#modal-add-tenor .addModalLabel').text('Edit Tenor');
 
@@ -80,7 +80,7 @@
 
         $.get(url)
             .done((response) => {
-                $('#modal-add-tenor [name=name]').val(response.name);
+                $('#modal-add-tenor [name=jum_tenor]').val(response.jum_tenor);
             })
             .fail((responseJSON) => {
                 alert('Tidak dapat menampilkan data.')

@@ -27,6 +27,6 @@ class Order extends Model
 
     public function creditOrder()
     {
-        return $this->hasMany(Completed_order::class, 'completed_order_id');
+        return $this->hasOne(Completed_order::class, 'completed_order_id');
     }
 }

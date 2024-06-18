@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Completed_order;
 use App\Models\Order;
-use App\Models\Order_detail;
 use Illuminate\Http\Request;
 
 class CompletedOrderController extends Controller
@@ -28,11 +27,15 @@ class CompletedOrderController extends Controller
             $row['total_item'] = $complit->order['total_item'];
             $row['price']      = '<input type="number" class="form-control input-sm price" data-id="' . $complit->id . '" value="' . $complit->price . '">';
             $row['action']     = '<div class="d-flex">
-                                <a href="" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-money"></i></a>
-                                <a onclick="deleteData(`' . route('pesanan-selesai.destroy', $complit->id) . '`)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                              </div>';
+                                    <a href="' . route('pembayaran-cash.show', $complit->id) . '" class="btn btn-primary shadow btn-xs sharp me-1">
+                                        <i class="fas fa-money-bill"></i>
+                                    </a>
+                                    <a onclick="deleteData(`' . route('pesanan-selesai.destroy', $complit->id) . '`)" class="btn btn-danger shadow btn-xs sharp">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                  </div>';
             $data[] = $row;
-        }
+        }        
 
         $dataOrderCompleted = datatables()
             ->of($data)
@@ -41,23 +44,6 @@ class CompletedOrderController extends Controller
             ->make(true);
 
         return $dataOrderCompleted;
-    }
-
-
-    public function store(Request $request)
-    {
-        $orders = Order::where('id', $request->completed_order_id)->get();
-
-        if ($orders->isEmpty()) {
-            // return response()->json('Data gagal disimpan', 404);
-        }
-
-        foreach ($orders as $order) {
-            $complit = new Completed_order();
-            $complit->completed_order_id = $order->id;
-            $complit->price = 0;
-            $complit->save();
-        }
     }
 
     public function show($id)

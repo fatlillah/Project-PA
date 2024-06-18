@@ -73,6 +73,7 @@
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title">Pembayaran Tagihan</h6>
+                <button class="btn btn-warning btn-sm print" data-url=""><i class="fas fa-print"></i> Cetak Semua</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

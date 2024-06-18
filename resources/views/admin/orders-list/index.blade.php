@@ -17,15 +17,17 @@
                         <table id="example4" class="display table-orders-list" style="min-width: 845px">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>No.</th>
-                                    <th>Tanggal</th>
                                     <th>No. Order</th>
-                                    <th>Pemesan</th>
+                                    <th>Tanggal</th>
+                                    <th>Pelanggan</th>
                                     <th>Total Item</th>
-                                    <th>Tanggal Ambil</th>
+                                    <th>Diambil</th>
                                     <th>DP</th>
+                                    <th>Status</th>
                                     <th>Kasir</th>
-                                    <th>Aksi</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                         </table>

@@ -98,37 +98,6 @@
     })
 });
 
-
-
-function addForm() {
-        $('#modal-order').modal('show');
-        $('#modal-order .modal-title').text('Pesanan selesai dibuat');
-    }
-
-    function hideOrder() {
-        $('#modal-order').modal('hide');
-    }
-
-    function selectOrder(id, name) {
-        $('#completed_order_id').val(id);
-        hideOrder();
-        addOrder();
-    }
-
-    function addOrder() {
-       $.post('{{ route('pesanan-selesai.store') }}', 
-       $('#form-order').serialize()
-       )
-       .done(response => {
-            $('#name').focus();
-            $('.table-index').DataTable().ajax.reload();
-       })
-       .fail(errors => {
-            alert('Tidak dapat menyimpan data');
-            return;
-       })
-    }
-
     function editForm(url) {
         $('#modal-add-tenor').modal('show');
         $('#modal-add-tenor .addModalLabel').text('Edit Tenor');

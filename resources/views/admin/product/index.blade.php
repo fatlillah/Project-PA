@@ -39,7 +39,7 @@
                                     <th>Stok</th>
                                     <th>Harga Jual</th>
                                     @if (auth()->user()->hasRole('admin'))
-                                    <th>Harga Bersih</th>
+                                    <th>Harga Modal</th>
                                     <th>Aksi</th>
                                     @endif
                                 </tr>
