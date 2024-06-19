@@ -15,6 +15,13 @@
             margin-bottom: 20px;
         }
 
+        .header img {
+            max-width: 50%; /* Set a maximum width as a percentage of the container */
+            max-height: 150px; /* Set a maximum height in pixels */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 10px;
+        }
+
         .header h2 {
             margin: 0;
         }
@@ -68,53 +75,41 @@
     </style>
 </head>
 
-<body>
+<body onload="window.print()">
     <div class="header">
+        <img src="{{ url('assets/images/logo-resaare.png') }}" alt="Logo">
         <h2>Nota Pembayaran</h2>
-        <p>Terima Kasih atas Pembelian Anda!</p>
+        <p>Terima Kasih atas Pemesanan Anda!</p>
     </div>
     <div class="table-container">
         <div class="flex-container">
             <div>
                 <p>Nama Pelanggan: {{ $order->customer->name }}</p>
-                <p>Tanggal Pembelian: {{ $order->created_at->format('d-m-Y') }}</p>
+                <p>Tanggal Pembayaran: {{ indonesian_date($order->created_at, false)}}</p>
             </div>
             <div style="text-align: right;">
-                <p>No. Order: {{ $order->id }}</p>
+                <p>No. Order: {{ $order->no_order }}</p>
             </div>
         </div>
-        <hr>
-        @if ($order->orderDetail->count() > 0)
-        <div>
-            <p><strong>Daftar Produk:</strong></p>
-            <ul>
-                @foreach ($order->orderDetail as $item)
-                <li>{{ $item->detail_size->name_product }} - Jumlah: {{ $item->amount }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
         <hr>
         <table>
             <thead>
                 <tr>
-                    <th>No</th>
                     <th>Bulan</th>
                     <th>Angsuran</th>
                     <th>Tagihan</th>
+                    <th>Status</th>
                     <th>Tanggal Bayar</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($creditPayDetail as $item)
-                <tr class="{{ $item->status === 'Belum bayar' ? 'text-danger' : '' }}">
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ indonesian_date($item->month, 'month_year') }}</td>
-                    <td>Angsuran ke-{{ $item->no_credit }}</td>
-                    <td>{{ format_of_money($item->bill) }}</td>
-                    <td>{{ indonesian_date($item->pay_date, 'date_month_year') }}</td>
+                <tr class="{{ $creditPayDetail->status === 'Belum bayar' ? 'text-danger' : '' }}">
+                    <td>{{ indonesian_date($creditPayDetail->month, 'month_year') }}</td>
+                    <td>Angsuran ke-{{ $creditPayDetail->no_credit }}</td>
+                    <td>{{ format_of_money($creditPayDetail->bill) }}</td>
+                    <td>{{ $creditPayDetail->status }}</td>
+                    <td>{{ indonesian_date($creditPayDetail->pay_date, 'date_month_year') }}</td>
                 </tr>
-                @endforeach
             </tbody>
         </table>
         <div class="footer">

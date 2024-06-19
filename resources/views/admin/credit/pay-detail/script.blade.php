@@ -84,6 +84,14 @@
             }
         });
     });
+    $(document).on('click', '.print-receipt', function(e) {
+            e.preventDefault();
+            var button = $(this);
+            var url = button.data('url');
+
+            // Buka jendela baru untuk mencetak nota
+            window.open(url, '_blank');
+        });
     });
 </script>
 @endpush

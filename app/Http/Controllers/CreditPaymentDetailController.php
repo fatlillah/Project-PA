@@ -75,15 +75,19 @@ class CreditPaymentDetailController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function printNota($id)
+    public function nota($id)
     {
-        $creditPayment = Credit_payment::with('credit.creditOrder.order.orderDetail.detail_size', 'credit.creditOrder.order.customer')->findOrFail($id);
-        $creditPayDetail = Credit_payment_detail::with('creditPay')->where('credit_pay_id', $id)->get();
-        $order = $creditPayment->credit->creditOrder->order;
+        $creditPayDetail = Credit_payment_detail::with('creditPay.credit.creditOrder.order.orderDetail')->find($id);
 
-        return view('admin.credit.pay-detail.print', compact('order', 'creditPayDetail'));
+        if (!$creditPayDetail) {
+            abort(404, 'Payment Detail not found');
+        }
+
+        $creditPayment = $creditPayDetail->creditPay;
+        $creditOrder = $creditPayment->credit->creditOrder;
+        $order = $creditOrder->order;
+        $orderDetails = $order->orderDetail;
+
+        return view('admin.credit.pay-detail.print', compact('creditPayDetail', 'creditPayment', 'creditOrder', 'order', 'orderDetails'));
     }
-
-    
 }
-

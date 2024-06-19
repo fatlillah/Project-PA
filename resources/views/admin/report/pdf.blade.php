@@ -66,8 +66,9 @@
                 <tr>
                     <th>No.</th>
                     <th width="18%">Tanggal</th>
-                    <th>Penjualan Bersih</th>
+                    <th>Biaya Produksi</th>
                     <th>Penjualan</th>
+                    <th>Pemesanan</th>
                     <th>Pengeluaran</th>
                     <th>Pendapatan</th>
                 </tr>
@@ -80,8 +81,9 @@
                 <tr>
                     <td><?= $row['DT_RowIndex'] ?></td>
                     <td><?= $row['date'] ?></td>
-                    <td><?= $row['sales'] ?></td>
                     <td><?= $row['production_cost'] ?></td>
+                    <td><?= $row['sales'] ?></td>
+                    <td><?= $row['orders'] ?></td>
                     <td><?= $row['expenditure'] ?></td>
                     <td class="dark-column"><?= $row['income'] ?></td>
                 </tr>

@@ -41,6 +41,7 @@
                                 <th >Tanggal</th>
                                 <th width="20%">Biaya Produksi</th>
                                 <th>Penjualan</th>
+                                <th>Pemesanan</th>
                                 <th>Pengeluaran</th>
                                 <th>Pendapatan</th>
                             </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Credit_payment;
 use App\Models\Expenditure;
 use App\Models\Production_cost;
 use App\Models\Sale;
@@ -37,14 +38,16 @@ class ReportController extends Controller
             $total_sales = Sale::where('created_at', 'LIKE', "%$date%")->sum('pay');
             $total_production_cost = Production_cost::where('created_at', 'LIKE', "%$date%")->sum('grand_total');
             $total_expenditure = Expenditure::where('created_at', 'LIKE', "%$date%")->sum('nominal');
+            $totalCredit = Credit_payment::where('created_at', 'LIKE', "%$date%")->sum('paid');
 
-            $income = $total_sales - $total_production_cost - $total_expenditure;
+            $income = $total_sales + $totalCredit - $total_production_cost - $total_expenditure;
             $total_income += $income;
 
             $row = array();
             $row['DT_RowIndex'] = $no++;
             $row['date'] = indonesian_date($date, false);
             $row['sales'] = format_of_money($total_sales);
+            $row['orders'] = format_of_money($totalCredit);
             $row['production_cost'] = format_of_money($total_production_cost);
             $row['expenditure'] = format_of_money($total_expenditure);
             $row['income'] = format_of_money($income);
@@ -56,6 +59,7 @@ class ReportController extends Controller
             'DT_RowIndex' => '',
             'date' => '',
             'sales' => '',
+            'orders' => '',
             'production_cost' => '',
             'expenditure' => 'Total Pendapatan',
             'income' => format_of_money($total_income),
