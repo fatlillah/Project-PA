@@ -9,16 +9,16 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f5f5f5;
         }
 
         .invoice-container {
             background-color: #fff;
             padding: 20px;
-            max-width: 600px; /* Lebar tabel disesuaikan */
-            margin: auto;
-            border: 1px solid #ddd;
+            width: 100%;
+            box-sizing: border-box;
+            border: none;
         }
 
         .header {
@@ -35,9 +35,9 @@
         }
 
         .store-info {
-            margin-left: 0px; /* Reduced margin to decrease the distance */
+            margin-left: 20px;
         }
-        .store-info p, .store-info h2{
+        .store-info p, .store-info h2 {
             margin: 0;
         }
 
@@ -70,7 +70,7 @@
 
         .product-table ul {
             list-style: disc;
-            padding-left: 20px; /* Disesuaikan dengan lebar tabel */
+            padding-left: 20px;
             margin: 0;
             display: grid;
             grid-template-columns: 250px 1fr;
@@ -89,7 +89,7 @@
 
         .product-details li span {
             margin-left: 10px;
-            display: contents
+            display: contents;
         }
 
         .payment-info {
@@ -108,10 +108,9 @@
         .notes p {
             margin: 0;
         }
-
     </style>
 </head>
-<body>
+<body onload="window.print()">
 <div class="invoice-container">
     <div class="header">
         <div class="logo">
@@ -122,17 +121,18 @@
             <p>Jl. KH. Wahid Hasyim Baratnya Resto Amanish</p>
             <p>WA: +62 819 1809 6923 IG: @resa_are</p>
         </div>
+    <button class="btn-print" style="position: absolute; right: 1rem; top: rem;" onclick="window.print()">Print</button>
+
     </div>
     <div class="order-details">
         <div class="order-info-left">
-            <p><strong>Nama Pemesan:</strong> {{ $orders->name_order }}</p>
-            <p><strong>No. Telp:</strong> {{ $orders->phone }}</p>
+            <p><strong>Nama Pemesan:</strong> {{ $orders->customer->name }}</p>
+            <p><strong>No. Telp:</strong> {{ $orders->customer->phone }}</p>
             <p><strong>Deadline:</strong> {{ $orders->deadline }}</p>
         </div>
         <div class="order-info-right">
-            <p><strong>Tanggal:</strong> {{ indonesian_date($orders->created_at, false) }}</p>
+            <p><strong>Tgl. Transaksi:</strong> {{ indonesian_date($orders->created_at, false) }}</p>
             <p><strong>No. Order:</strong> {{ $orders->no_order }}</p>
-            <p><strong>Metode Pembayaran:</strong> {{ $orders->credit }}</p>
         </div>
     </div>
     <table class="product-table">
@@ -171,7 +171,7 @@
     </table>
     <div class="payment-info">
         <p><strong>Transfer payment method:</strong></p>
-        <p>a.n DWI FATILLAH</p>
+        <p>a.n NUR EKA OKTAVIYAH</p>
         <p>Mandiri - 1400864346789</p>
     </div>
     <div class="notes">

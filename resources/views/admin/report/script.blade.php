@@ -30,6 +30,9 @@
                     data: 'sales'
                 },
                 {
+                    data: 'orders'
+                },
+                {
                     data: 'expenditure'
                 },
                 {

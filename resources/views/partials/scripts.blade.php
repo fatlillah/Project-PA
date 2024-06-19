@@ -14,7 +14,7 @@
 	
 	
 	<!-- Chart piety plugin files -->
-    {{-- <script src="{{ url('assets/vendor/peity/jquery.peity.min.js') }}"></script> --}}
+    <script src="{{ url('assets/vendor/peity/jquery.peity.min.js') }}"></script>
 	<!-- Dashboard 1 -->
 	<script src="{{ url('assets/js/dashboard/dashboard-1.js') }}"></script>
 	
@@ -75,5 +75,19 @@
 			}
 		});
 	</script>
-
+ 
+ <!-- Chartist -->
+ {{-- <script src="{{ url('assets/vendor/chartist/js/chartist.min.js') }}"></script> --}}
+ {{-- <script src="{{ url('assets/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js') }}"></script> --}}
+ 
+ 
+ <!-- Chart sparkline plugin files -->
+ {{-- <script src="{{ url('assets/vendor/jquery-sparkline/jquery.sparkline.min.js') }}"></script> --}}
+ {{-- <script src="{{ url('assets/js/plugins-init/sparkline-init.js') }}"></script> --}}
+ 
+ <!-- Chart piety plugin files -->
+ {{-- <script src="{{ url('assets/js/plugins-init/piety-init.js') }}"></script> --}}
+ 
+ <!-- Init file -->
+ 
  @stack('scripts')

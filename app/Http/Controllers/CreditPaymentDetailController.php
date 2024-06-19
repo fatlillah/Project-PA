@@ -13,9 +13,15 @@ class CreditPaymentDetailController extends Controller
         $creditPay = Credit_payment::with('credit')->orderBy('id', 'desc')->get();
         $creditPayDetail = Credit_payment_detail::with('creditPay')->where('credit_pay_id', $id)->get();
         $creditPayment = Credit_payment::with('credit.creditOrder')->find($id);
+
+        if (!$creditPayment) {
+            abort(404, 'Payment not found');
+        }
+
         $order = $creditPayment->credit->creditOrder->order;
         $orderDetails = $order->orderDetail;
         $creditOrder = $creditPayment->credit->creditOrder;
+
         return view('admin.credit.pay-detail.show', compact('creditPayDetail', 'creditPay', 'order', 'orderDetails', 'creditOrder'));
     }
 
@@ -57,16 +63,31 @@ class CreditPaymentDetailController extends Controller
     }
 
     public function destroy($id)
-{
-    $paymentDetail = Credit_payment_detail::find($id);
+    {
+        $paymentDetail = Credit_payment_detail::find($id);
 
-    if (!$paymentDetail) {
-        return response()->json(['error' => 'Not Found'], 404);
+        if (!$paymentDetail) {
+            return response()->json(['error' => 'Not Found'], 404);
+        }
+
+        $paymentDetail->delete();
+
+        return response()->json(['success' => true]);
     }
 
-    $paymentDetail->delete();
+    public function nota($id)
+    {
+        $creditPayDetail = Credit_payment_detail::with('creditPay.credit.creditOrder.order.orderDetail')->find($id);
 
-    return response()->json(['success' => true]);
-}
+        if (!$creditPayDetail) {
+            abort(404, 'Payment Detail not found');
+        }
 
+        $creditPayment = $creditPayDetail->creditPay;
+        $creditOrder = $creditPayment->credit->creditOrder;
+        $order = $creditOrder->order;
+        $orderDetails = $order->orderDetail;
+
+        return view('admin.credit.pay-detail.print', compact('creditPayDetail', 'creditPayment', 'creditOrder', 'order', 'orderDetails'));
+    }
 }

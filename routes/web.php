@@ -40,7 +40,8 @@ Route::get('kasir', function () {
 })->middleware(['auth', 'verified', 'role:kasir']);
 
 Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
 
     // produk
     Route::get('/datatable/produks/data', [ProductController::class, 'data'])->name('produk.data');
@@ -145,6 +146,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('pembayaran-kredit', CreditPaymentController::class);
     
     // pembayaran kredit detail
+    Route::get('/pembayaran-kredit-detail/nota/{id}', [CreditPaymentDetailController::class, 'nota'])->name('pembayaran-kredit-detail.nota');
     Route::post('/pembayaran-kredit-detail/status-bayar/{id}', [CreditPaymentDetailController::class, 'updateStatus'])->name('pembayaran-kredit-detail.updateStatus');
     Route::resource('pembayaran-kredit-detail', CreditPaymentDetailController::class);
     
@@ -153,5 +155,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/pembayaran-cash/data/{id}', [CashPaymentController::class, 'data'])->name('pembayaran-cash.data');
     Route::resource('pembayaran-cash', CashPaymentController::class);
 
+    
 });
 require __DIR__ . '/auth.php';
