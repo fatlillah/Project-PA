@@ -18,7 +18,7 @@ class OrderController extends Controller
     {
         $orders = Order::whereHas('customer', function ($query) {
             $query->where('name', '!=', '-');
-        })->orderBy('created_at', 'asc')->get();
+        })->orderBy('created_at', 'desc')->get();
 
         $dataOrder = datatables()
             ->of($orders)

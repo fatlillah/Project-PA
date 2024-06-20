@@ -5,7 +5,7 @@
     @include('partials.metas')
 
     <!-- PAGE TITLE HERE -->
-    <title>Admin Dashboard</title>
+    <title>ResaAre</title>
 
     @include('partials.styles')
 

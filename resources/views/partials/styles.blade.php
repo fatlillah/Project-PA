@@ -1,5 +1,5 @@
 <!-- FAVICONS ICON -->
-<link rel="shortcut icon" type="image/png" href="{{ url('assets/images/favicon.png') }}">
+<link rel="shortcut icon" type="image/png" href="{{ url('assets/images/logo-resaare.png') }}">
 <!-- Datatable -->
 <link href="{{ url('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <!-- Custom Stylesheet -->

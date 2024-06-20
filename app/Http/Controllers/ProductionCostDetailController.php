@@ -77,7 +77,7 @@ class ProductionCostDetailController extends Controller
         $detail = new Production_cost_detail();
         $detail->production_id = $request->production_id;
         $detail->product_id = $product->id;
-        $detail->stock = $product->stock;
+        $detail->stock = 0;
         $detail->net_price = $product->net_price;
         $detail->selling_price = $product->selling_price;
         $detail->subtotal = $product->net_price * $product->stock;

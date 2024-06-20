@@ -73,7 +73,10 @@
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title">Pembayaran Tagihan</h6>
-                <a href="" target="_blank" class="btn btn-warning btn-sm"><i class="fas fa-print"></i> Cetak Semua</a>
+                {{-- <button class="btn btn-warning btn-sm print-all" data-url="">
+                    <i class="fa fa-print"></i> Cetak Semua
+                </button> --}}
+                
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -102,12 +105,13 @@
                                     @if ($item->status === 'Belum bayar')
                                     <button class="btn btn-primary btn-sm update-status" data-url="{{ route('pembayaran-kredit-detail.updateStatus', $item->id) }}"><i class="fas fa-money-bill-wave"></i> Bayar</button>
                                     @else
-                                    <button class="btn btn-danger btn-sm delete-payment sharp me-1" data-url="{{ route('pembayaran-kredit-detail.destroy', $item->id) }}"><i class="fa fa-trash"></i> Hapus</button>
+                                    <button class="btn btn-danger btn-sm delete-payment sharp me-1" data-url="{{ route('pembayaran-kredit-detail.cancel', $item->id) }}"><i class="fa fa-trash"></i> Hapus</button>
                                     <button class="btn btn-success btn-sm print-receipt" data-url="{{ route('pembayaran-kredit-detail.nota', $item->id) }}">
                                         <i class="fa fa-print"></i> Cetak
                                     </button>
                                     @endif
                                 </td>
+                                                              
                             </tr>
                             @endforeach
                         </tbody>
