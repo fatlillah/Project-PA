@@ -33,13 +33,8 @@ class CreditPaymentDetailController extends Controller
             return response()->json(['error' => 'Not Found'], 404);
         }
 
-        // Toggle status
-        if ($paymentDetail->status === 'Belum bayar') {
-            $paymentDetail->status = 'Sudah bayar';
-        } else {
-            $paymentDetail->status = 'Belum bayar';
-        }
-
+        // Set status to 'Sudah bayar'
+        $paymentDetail->status = 'Sudah bayar';
         $paymentDetail->save();
 
         // Update paid and remaining bill
@@ -59,20 +54,23 @@ class CreditPaymentDetailController extends Controller
             $creditPayment->save();
         }
 
-        return response()->json(['status' => $paymentDetail->status]);
+        return response()->json([
+            'status' => $paymentDetail->status,
+            'receipt_url' => route('pembayaran-kredit-detail.nota', $id),
+            'delete_url' => route('pembayaran-kredit-detail.cancel', $id)
+        ]);
     }
 
-    public function destroy($id)
+    public function cancel($id)
     {
-        $paymentDetail = Credit_payment_detail::find($id);
+        $payment = Credit_payment_detail::findOrFail($id);
+        $payment->status = 'Belum bayar';
+        $payment->save();
 
-        if (!$paymentDetail) {
-            return response()->json(['error' => 'Not Found'], 404);
-        }
-
-        $paymentDetail->delete();
-
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'status' => $payment->status,
+        ]);
     }
 
     public function nota($id)
@@ -89,5 +87,24 @@ class CreditPaymentDetailController extends Controller
         $orderDetails = $order->orderDetail;
 
         return view('admin.credit.pay-detail.print', compact('creditPayDetail', 'creditPayment', 'creditOrder', 'order', 'orderDetails'));
+    }
+
+    public function generateComprehensiveReceipt($id)
+    {
+        $creditPayment = Credit_payment::with([
+            'credit.creditOrder.order.orderDetail',
+            'creditPaymentDetails'
+        ])->find($id);
+
+        if (!$creditPayment) {
+            abort(404, 'Credit Payment not found');
+        }
+
+        $creditOrder = $creditPayment->credit->creditOrder;
+        $order = $creditOrder->order;
+        $orderDetails = $order->orderDetail;
+        $paymentDetails = $creditPayment->creditPaymentDetails;
+
+        return view('admin.credit.pay.print', compact('creditPayment', 'creditOrder', 'order', 'orderDetails', 'paymentDetails'));
     }
 }

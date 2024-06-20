@@ -31,7 +31,9 @@
                 { data: 'total_item' },
                 { data: 'price' },
                 { data: 'tenor' },
+                @role('admin')
                 { data: 'action', searchable: false, sortable: false }
+                @endrole
             ]
         });
 

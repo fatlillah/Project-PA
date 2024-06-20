@@ -97,6 +97,30 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     // pengeluaran
     Route::get('/datatable/pengeluarans/data', [ExpenditureController::class, 'data'])->name('pengeluaran.data');
     Route::resource('pengeluaran', ExpenditureController::class);
+
+    // Pesanan selesai
+    Route::get('/datatable/pesanan-selesais/data', [CompletedOrderController::class, 'data'])->name('pesanan-selesai.data');
+    Route::resource('pesanan-selesai', CompletedOrderController::class);
+
+    //data kredit
+    Route::get('/datatable/data-kredits/data', [CreditController::class, 'data'])->name('data-kredit.data');
+    Route::resource('data-kredit', CreditController::class);
+
+    // pembayaran kredit
+    Route::resource('pembayaran-kredit', CreditPaymentController::class);
+    
+    // pembayaran kredit detail
+    Route::get('/pembayaran-kredit/nota/{id}', [CreditPaymentDetailController::class, 'nota'])->name('pembayaran-kredit.nota');
+    Route::get('/pembayaran-kredit-detail/nota/{id}', [CreditPaymentDetailController::class, 'nota'])->name('pembayaran-kredit-detail.nota');
+    Route::post('/pembayaran-kredit-detail/status-bayar/{id}', [CreditPaymentDetailController::class, 'updateStatus'])->name('pembayaran-kredit-detail.updateStatus');
+    Route::post('/pembayaran-kredit-detail/{id}/cancel', [CreditPaymentDetailController::class, 'cancel'])->name('pembayaran-kredit-detail.cancel');
+    Route::get('/pembayaran-kredit-detail/{id}', [CreditPaymentDetailController::class, 'show'])->name('pembayaran-kredit-detail.show');
+
+    
+    // pembayaran cash
+    Route::post('/pembayaran-cash/update-discount', [CashPaymentController::class, 'updateDiscount'])->name('pembayaran-cash.updateDiscount');
+    Route::get('/pembayaran-cash/data/{id}', [CashPaymentController::class, 'data'])->name('pembayaran-cash.data');
+    Route::resource('pembayaran-cash', CashPaymentController::class);
 });
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -133,28 +157,5 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // tenor
     Route::get('/datatable/tenors/data', [TenorController::class, 'data'])->name('tenor.data');
     Route::resource('tenor', TenorController::class);
-
-    // Pesanan selesai
-    Route::get('/datatable/pesanan-selesais/data', [CompletedOrderController::class, 'data'])->name('pesanan-selesai.data');
-    Route::resource('pesanan-selesai', CompletedOrderController::class);
-
-    //data kredit
-    Route::get('/datatable/data-kredits/data', [CreditController::class, 'data'])->name('data-kredit.data');
-    Route::resource('data-kredit', CreditController::class);
-
-    // pembayaran kredit
-    Route::resource('pembayaran-kredit', CreditPaymentController::class);
-    
-    // pembayaran kredit detail
-    Route::get('/pembayaran-kredit-detail/nota/{id}', [CreditPaymentDetailController::class, 'nota'])->name('pembayaran-kredit-detail.nota');
-    Route::post('/pembayaran-kredit-detail/status-bayar/{id}', [CreditPaymentDetailController::class, 'updateStatus'])->name('pembayaran-kredit-detail.updateStatus');
-    Route::resource('pembayaran-kredit-detail', CreditPaymentDetailController::class);
-    
-    // pembayaran cash
-    Route::post('/pembayaran-cash/update-discount', [CashPaymentController::class, 'updateDiscount'])->name('pembayaran-cash.updateDiscount');
-    Route::get('/pembayaran-cash/data/{id}', [CashPaymentController::class, 'data'])->name('pembayaran-cash.data');
-    Route::resource('pembayaran-cash', CashPaymentController::class);
-
-    
 });
 require __DIR__ . '/auth.php';

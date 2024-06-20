@@ -14,6 +14,7 @@
                 <ul aria-expanded="false">
                     @if (auth()->user()->hasRole('admin'))
                     <li><a href="{{ url('kategori') }}">Kategori</a></li>
+                    <li><a href="{{ url('tenor') }}">Tenor</a></li>
                     @endif
                     @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
                     <li><a href="{{ url('produk') }}">Produk</a></li>
@@ -64,7 +65,6 @@
         </a>
         <ul aria-expanded="false">
             @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('kasir'))
-            <li><a href="{{ url('tenor') }}">Tenor</a></li>
             <li><a href="{{ url('data-kredit') }}">Data Angsuran</a></li>
             <li><a href="{{ url('pembayaran-kredit') }}">Data Pembayaran</a></li>
             @endif

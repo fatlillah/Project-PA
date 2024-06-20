@@ -7,7 +7,7 @@
                             <li class="nav-item dropdown  header-profile">
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
                                     @php($profile_image = auth()->user()->profile_image)
-                                    <img id="header_profile_image" src="@if($profile_image == null) {{ asset("storage/profile_images/avatar.png") }}  @else {{ asset("storage/$profile_image") }} @endif" width="56" alt="">
+                                    <img id="header_profile_image" src="@if($profile_image == null) {{ asset($user->profile_image) }}  @else {{ asset("storage/$profile_image") }} @endif" width="56" alt="">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a href="{{ route('profile.edit') }}" class="dropdown-item ai-icon">

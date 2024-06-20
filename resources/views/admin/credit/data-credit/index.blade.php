@@ -17,11 +17,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                @if (auth()->user()->hasRole('admin'))
                 <div class="btn-group mb-1">
                     <button type="button" class="btn btn-primary light px-3" onclick="addForm('{{ route('data-kredit.store') }}')"><i class="fa fa-plus-circle"></i> Tambah Data Angsuran</button>
                 </div>
-                @endif
             </div>            
             <div class="card-body">
                 <div class="table-responsive">
@@ -34,7 +32,9 @@
                                     <th style="width: 15%">Total Pesanan</th>
                                     <th style="width: 14%">Harga</th>
                                     <th style="width: 10%">Tenor</th>
+                                    @role('admin')
                                     <th>Aksi</th>
+                                    @endrole
                                 </tr>
                             </thead>
                         </table>

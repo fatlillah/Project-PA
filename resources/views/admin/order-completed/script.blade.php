@@ -26,10 +26,13 @@
                 data: 'price'
             },
             {
-                data: 'action',
-                searchable: false,
-                sortable: false
+                data: 'pay'
             },
+            @if (auth()->user()->role == 'admin')
+            {
+                data: 'delete',
+            },
+            @endif
         ]
     });
 
