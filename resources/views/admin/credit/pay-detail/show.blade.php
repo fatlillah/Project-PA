@@ -73,10 +73,9 @@
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title">Pembayaran Tagihan</h6>
-                {{-- <button class="btn btn-warning btn-sm print-all" data-url="">
+                 <button class="btn btn-warning btn-sm print-all" data-url="{{ route('pembayaran-kredit-detail.printAll', $creditPayment->id) }}">
                     <i class="fa fa-print"></i> Cetak Semua
-                </button> --}}
-                
+                </button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -96,22 +95,25 @@
                             @foreach ($creditPayDetail as $item)
                             <tr data-id="{{ $item->id }}">
                                 <td>{{ $loop->iteration }}</td>
-                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : '' }}">{{ indonesian_date($item->month, 'month_year') }}</td>
-                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : '' }}">Angsuran ke-{{ $item->no_credit }}</td>
-                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : '' }}">{{ format_of_money($item->bill) }}</td>
-                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : '' }}">{{ $item->status }}</td>
-                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : '' }}">{{ indonesian_date($item->pay_date, 'date_month_year') }}</td>
+                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : 'text-dark' }}">{{ indonesian_date($item->month, 'month_year') }}</td>
+                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : 'text-dark' }}">Angsuran ke-{{ $item->no_credit }}</td>
+                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : 'text-dark' }}">{{ format_of_money($item->bill) }}</td>
+                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : 'text-dark' }}">{{ $item->status }}</td>
+                                <td class="{{ $item->status === 'Belum bayar' ? 'text-danger' : 'text-dark' }}">{{ indonesian_date($item->pay_date, 'date_month_year') }}</td>
                                 <td width="20%">
                                     @if ($item->status === 'Belum bayar')
-                                    <button class="btn btn-primary btn-sm update-status" data-url="{{ route('pembayaran-kredit-detail.updateStatus', $item->id) }}"><i class="fas fa-money-bill-wave"></i> Bayar</button>
+                                        <button class="btn btn-primary btn-sm update-status" data-url="{{ route('pembayaran-kredit-detail.updateStatus', $item->id) }}">
+                                            <i class="fas fa-money-bill-wave"></i> Bayar
+                                        </button>
                                     @else
-                                    <button class="btn btn-danger btn-sm delete-payment sharp me-1" data-url="{{ route('pembayaran-kredit-detail.cancel', $item->id) }}"><i class="fa fa-trash"></i> Hapus</button>
-                                    <button class="btn btn-success btn-sm print-receipt" data-url="{{ route('pembayaran-kredit-detail.nota', $item->id) }}">
-                                        <i class="fa fa-print"></i> Cetak
-                                    </button>
+                                        <button class="btn btn-danger btn-sm cancel-payment sharp me-1" data-url="{{ route('pembayaran-kredit-detail.cancel', $item->id) }}">
+                                            <i class="fas fa-times"></i> Cancel
+                                        </button>
+                                        <button class="btn btn-info btn-sm print-receipt" data-url="{{ route('pembayaran-kredit-detail.nota', $item->id) }}">
+                                            <i class="fa fa-print"></i> Cetak
+                                        </button>
                                     @endif
                                 </td>
-                                                              
                             </tr>
                             @endforeach
                         </tbody>
