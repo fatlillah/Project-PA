@@ -32,7 +32,7 @@
                                 <th>Nama Pemesan</th>
                                 <th>Total Item</th>
                                 <th width="17%">Harga</th>
-                                <th>Aksi</th>
+                                {{-- <th>Aksi</th> --}}
                             </tr>
                         </thead>
                     </table>

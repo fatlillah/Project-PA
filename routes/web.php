@@ -41,6 +41,7 @@ Route::get('kasir', function () {
 
 Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/produk-terlaris', [DashboardController::class, 'getProductSalesData'])->name('produk-terlaris');
 
 
     // produk
@@ -110,7 +111,7 @@ Route::middleware(['auth', 'verified', 'role:admin|kasir'])->group(function () {
     Route::resource('pembayaran-kredit', CreditPaymentController::class);
     
     // pembayaran kredit detail
-    Route::get('/pembayaran-kredit/nota/{id}', [CreditPaymentDetailController::class, 'nota'])->name('pembayaran-kredit.nota');
+    Route::get('pembayaran-kredit-detail/print-all/{id}', [CreditPaymentDetailController::class, 'printAll'])->name('pembayaran-kredit-detail.printAll');
     Route::get('/pembayaran-kredit-detail/nota/{id}', [CreditPaymentDetailController::class, 'nota'])->name('pembayaran-kredit-detail.nota');
     Route::post('/pembayaran-kredit-detail/status-bayar/{id}', [CreditPaymentDetailController::class, 'updateStatus'])->name('pembayaran-kredit-detail.updateStatus');
     Route::post('/pembayaran-kredit-detail/{id}/cancel', [CreditPaymentDetailController::class, 'cancel'])->name('pembayaran-kredit-detail.cancel');

@@ -26,11 +26,11 @@ class CompletedOrderController extends Controller
             $row['customer']   = $complit->order->customer['name'];
             $row['total_item'] = $complit->order['total_item'];
             $row['price']      = '<input type="number" class="form-control input-sm price" data-id="' . $complit->id . '" value="' . $complit->price . '">';
-            $row['pay']     = '<div class="d-flex">
-                                    <a href="' . route('pembayaran-cash.show', $complit->id) . '" class="btn btn-primary shadow btn-xs sharp me-1">
-                                        <i class="fas fa-money-bill"></i>
-                                    </a>
-                                  </div>';
+            // $row['pay']     = '<div class="d-flex">
+            //                         <a href="' . route('pembayaran-cash.show', $complit->id) . '" class="btn btn-primary shadow btn-xs sharp me-1">
+            //                             <i class="fas fa-money-bill"></i>
+            //                         </a>
+            //                       </div>';
             $row['delete']     = '<div class="d-flex">
                                     <a onclick="deleteData(`' . route('pesanan-selesai.destroy', $complit->id) . '`)" class="btn btn-danger shadow btn-xs sharp">
                                         <i class="fa fa-trash"></i>

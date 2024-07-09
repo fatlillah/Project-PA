@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nota Pembayaran Kredit</title>
     <style>
         body {
@@ -74,7 +74,6 @@
         }
     </style>
 </head>
-
 <body onload="window.print()">
     <div class="header">
         <img src="{{ url('assets/images/logo-resaare.png') }}" alt="Logo">
@@ -91,30 +90,56 @@
             </div>
         </div>
         <hr>
-        <table>
-            <thead>
-                <tr>
-                    <th>Bulan</th>
-                    <th>Angsuran</th>
-                    <th>Tagihan</th>
-                    <th>Status</th>
-                    <th>Tanggal Bayar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="{{ $creditPayDetail->status === 'Belum bayar' ? 'text-danger' : '' }}">
-                    <td>{{ indonesian_date($creditPayDetail->month, 'month_year') }}</td>
-                    <td>Angsuran ke-{{ $creditPayDetail->no_credit }}</td>
-                    <td>{{ format_of_money($creditPayDetail->bill) }}</td>
-                    <td>{{ $creditPayDetail->status }}</td>
-                    <td>{{ indonesian_date($creditPayDetail->updated_at, 'date_month_year') }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <h4>List Pesanan:</h4>
+<table>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Nama Produk</th>
+            <th>Jumlah</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($orderDetails as $item)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $item->detail_size->name_product }}</td>
+            <td>{{ $item->amount }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+<h4>Pembayaran Tagihan:</h4>
+<table>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Bulan</th>
+            <th>Angsuran</th>
+            <th>Tagihan</th>
+            <th>Status</th>
+            <th>Tanggal Bayar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($creditPayDetail as $item)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ indonesian_date($item->month, 'month_year') }}</td>
+            <td>Angsuran ke-{{ $item->no_credit }}</td>
+            <td>{{ format_of_money($item->bill) }}</td>
+            <td>{{ $item->status }}</td>
+            <td>{{ indonesian_date($item->updated_at, 'date_month_year') }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
         <div class="footer">
             <h3>-- TERIMA KASIH --</h3>
         </div>
     </div>
 </body>
-
 </html>
+
+
+

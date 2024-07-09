@@ -32,7 +32,7 @@ class OrderController extends Controller
                                                             <a class="dropdown-item" href="javascript:void(0);" onclick="updateStatus(' . $orders->id . ', 1)">Processing</a>
                                                             <a class="dropdown-item" href="javascript:void(0);" onclick="updateStatus(' . $orders->id . ', 0)">Pending</a>
                                                                 <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item text-primary" href="javascript:void(0);" onclick="showDetail(`' . route('daftar-pemesanan.show', $orders->id) . '`)"><i class="fas fa-eye"></i> Detail</a>
+                                                                
                                                                 <a class="dropdown-item text-danger" href="javascript:void(0);" onclick="deleteData(`' . route('daftar-pemesanan.destroy', $orders->id) . '`)"><i class="fa fa-trash"></i> Delete</a>
                                                             </div>
                                                         </div>

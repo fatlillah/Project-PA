@@ -25,9 +25,9 @@
             {
                 data: 'price'
             },
-            {
-                data: 'pay'
-            },
+            // {
+            //     data: 'pay'
+            // },
             @if (auth()->user()->role == 'admin')
             {
                 data: 'delete',
